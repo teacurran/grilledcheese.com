@@ -1,0 +1,401 @@
+<HTML>
+<HEAD>
+	<link rel="SHORTCUT ICON" href="/favicon.ico"">
+    <META name="description" CONTENT="Original Freeware, Shareware, and Commercial Fonts Instantly Downloadable For Your Windows or Macintosh Computer.">
+	<META NAME="keywords" CONTENT="Grilledcheese.com, TeA, Calcium, Fonts, Freeware, Shareware, Commercial, Grunge, Typeface, Founts, Serif, Display, Punk, Tacos, Grilled, Cheese, Monkey, Desktop Publishing, Foundry, TacoLand, perl, cgi, design, freelance">
+	<!--- %META% --->
+	<TITLE><!--- %TITLE% ---></TITLE>
+		<style type="text/css">
+
+
+        	a:link {
+                	color: 000066;
+                	font-family: verdana,helvetica,Arial;
+        	}
+        	a:active {
+                	color: FF0000;
+                	font-family: verdana,helvetica,Arial;
+        	}
+        	a:visited {
+                	color: 000066;
+                	font-family: verdana,helvetica,Arial;
+        	}
+        	a:hover {
+                	color: 666699;
+                	font-family: verdana,helvetica,Arial;
+        	}
+
+        	body {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 10pt;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+        	td {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 10pt;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+   			th {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 10pt;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+    		.standard {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 9pt;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+        	.standardBold {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 9pt;
+                	font-weight: bold;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+        	.standardBoldLarge {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 11pt;
+                	font-weight: bold;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+        	.standardSmall {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 9pt;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+        	.standardExtraSmall {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 9pt;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+    		.standardWhite {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 9pt;
+                	color: FFFFFF;
+                	text-decoration: none;
+        	}
+        	.headLineStandard {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 15pt;
+                	font-weight: bold;
+                	color: 000000;
+                	text-decoration: none;
+        	}
+        	.linkStandardBold {
+                	font-family: verdana,helvetica,Arial;
+                	font-size: 9pt;
+                	font-weight: bold;
+                	color: 000066;
+        	}
+
+	</style>
+<script language="JavaScript">
+	var inHomeLeft = 550;
+	var inSliderDisplay = 60;
+	var inMoveDistance = 10;
+	var inRepeatSpeed = 10;
+	var inSliderRemoved = -240;
+	var inMinDispatchSpace = 50;
+	var inMostRecentDispatch = -1;
+	var inSliderWidth = 229;
+	var inNumInAction = 0;
+	var inAcceleration = 3;
+
+	aInQue	= new Array();
+
+	aAllSliders = new Array();
+
+	aAllSliders[0] = new Array();
+	aAllSliders[0][0] = "fonts";
+	aAllSliders[0][1] = "0";	// 0 - home location
+								// 1 - in que to be dispatched
+								// 2 - traveling to display
+								// 3 - at display
+								// 4 - exiting display
+	aAllSliders[0][2] = "0"; // dispose of immediately
+
+	aAllSliders[1] = new Array();
+	aAllSliders[1][0] = "about";
+	aAllSliders[1][1] = "0";
+	aAllSliders[1][2] = "0";
+
+	aAllSliders[2] = new Array();
+	aAllSliders[2][0] = "tea";
+	aAllSliders[2][1] = "0";
+	aAllSliders[2][2] = "0";
+
+	aAllSliders[3] = new Array();
+	aAllSliders[3][0] = "guestbook";
+	aAllSliders[3][1] = "0";
+	aAllSliders[3][2] = "0";
+
+	aAllSliders[4] = new Array();
+	aAllSliders[4][0] = "updates";
+	aAllSliders[4][1] = "0";
+	aAllSliders[4][2] = "0";
+
+	aAllSliders[5] = new Array();
+	aAllSliders[5][0] = "links";
+	aAllSliders[5][1] = "0";
+	aAllSliders[5][2] = "0";
+
+	function setSlider() {
+		var stSliderName = "";
+		var stMostRecentDispatch = "";
+		var inFirstSliderInQue = -1;
+		var bPresentNextSlider = false;
+		var inDistanceToMove = 0;
+
+		var inNewX;
+
+		if (aInQue.length > 0) {
+			inFirstSliderInQue = aInQue[0];
+
+			if (inMostRecentDispatch == inFirstSliderInQue) {
+				bPresentNextSlider = true;
+			} else if (inMostRecentDispatch > -1 ) {
+
+				stMostRecentDispatch = "slide_" + aAllSliders[inMostRecentDispatch][0];
+				if ((parseInt(document.getElementById(stMostRecentDispatch).style.left) + inSliderWidth + inMinDispatchSpace <= inHomeLeft) || (aAllSliders[inMostRecentDispatch][1] == 0)) {
+					//alert(document[stMostRecentDispatch].left + " - " + document[stMostRecentDispatch].left + inSliderWidth + inMinDispatchSpace)
+					bPresentNextSlider = true;
+				}
+			} else if (inMostRecentDispatch == -1) {
+				bPresentNextSlider = true;
+			}
+
+			if (bPresentNextSlider) {
+				if (aAllSliders[inFirstSliderInQue][1] != 2 && aAllSliders[inFirstSliderInQue][1] != 4) {
+					presentNextInQue();
+				}
+			}
+		}
+
+		inDistanceToMove = (inMoveDistance + (inNumInAction * inAcceleration));
+
+		for (i = 0; i < aAllSliders.length; i++) {
+			stSliderName = "slide_" + aAllSliders[i][0];
+
+			// if slider is travelind and needs to be disposed of immediately, set it so it will be
+			if (aAllSliders[i][1] == 2 && aAllSliders[i][2] == 1) {
+				aAllSliders[i][2] = 0;
+				aAllSliders[i][1] = 4;
+			}
+
+			// do we have a slider thats in the traveling position?
+			if (aAllSliders[i][1] == 2){
+				if (parseInt(document.getElementById(stSliderName).style.left) <= inSliderDisplay) {
+					documentaAllSliders[i][1] = 3;
+				} else if (parseInt(document.getElementById(stSliderName).style.left) - inDistanceToMove < inSliderDisplay) {
+					document.getElementById(stSliderName).style.left = inSliderDisplay;
+					aAllSliders[i][1] = 3;
+				} else {
+					inNewX = parseInt(document.getElementById(stSliderName).style.left) - inDistanceToMove;
+					document.getElementById(stSliderName).style.left = inNewX + "px";
+				}
+			// do we have a slider ready to go home?
+			} else if (aAllSliders[i][1] == 4) {
+				if (parseInt(document.getElementById(stSliderName).style.left) <= inSliderRemoved) {
+					document.getElementById(stSliderName).style.left = inHomeLeft + "px";
+					inNumInAction--;
+					showSpeed(inNumInAction);
+					aAllSliders[i][1] = 0;
+				} else {
+					inNewX = parseInt(document.getElementById(stSliderName).style.left) - inDistanceToMove;
+					document.getElementById(stSliderName).style.left = inNewX + "px";
+				}
+			}
+		}
+
+		//var stSliderFull = "slide_" + stSlider;
+		//document[stSliderFull].left = document[stSliderFull].left - 10;
+	}
+
+	function presentNextInQue() {
+		if (aInQue.length > 0) {
+			aAllSliders[aInQue[0]][1] = 2;	// set the slider in the traveling state
+			inMostRecentDispatch = aInQue[0];	// set this slider as the most recently dispatched.
+			var temp = aInQue.shift();
+		}
+	}
+
+	function addSliderToQue(inSliderId) {
+		var boAlreadyInQue = false;
+		for (var i = 0; i < aInQue.length; i++) {
+			if (aInQue[i] == inSliderId) {
+				boAlreadyInQue = true;
+			}
+		}
+		if (!boAlreadyInQue) {
+			aInQue.push(inSliderId);
+			inNumInAction++;
+			showSpeed(inNumInAction);
+			// set it up to be dispatched if its not already traveling
+			if (aAllSliders[inSliderId][1] != 2 && aAllSliders[inSliderId][1] != 4) {
+				aAllSliders[inSliderId][1] = 1;
+			}
+    	}
+	}
+
+	function showSpeed(inSpeed) {
+		var boShowThisSpeeder = false;
+		for (var i = 1; i < 24; i++) {
+			if (i <= inSpeed) {
+				document["speed_" + i].src = imgSpeederRed.src;
+			} else {
+				document["speed_" + i].src = imgSpeederGrey.src;
+			}
+		}
+	}
+
+	imgCubeFilled = new Image();
+	imgCubeBlack = new Image();
+	imgSpeederGrey = new Image();
+	imgSpeederRed = new Image();
+
+	imgCubeFilled.src = "/img/gen4/cube_filled.gif";
+	imgCubeBlack.src = "/img/gen4/cube_black.gif";
+	imgSpeederGrey.src = "/img/gen4/pixel_grey.gif";
+	imgSpeederRed.src = "/img/gen4/pixel_red.gif";
+
+	// public methods so to say from this point on //
+
+
+	function presentSlider(inSliderId) {
+		if (aAllSliders[inSliderId][2] == 1) {
+			aAllSliders[inSliderId][2] = 0; // tell it not to remove the slider.
+		} else {
+			addSliderToQue(inSliderId);
+		}
+
+		// change cube to black and white
+		document["cube_" + inSliderId].src = imgCubeFilled.src;
+	}
+
+	function removeSlider(inSliderId) {
+		if (aAllSliders[inSliderId][1] == 2 || aAllSliders[inSliderId][1] == 3) {
+			aAllSliders[inSliderId][1] = 4;
+		} else {
+			aAllSliders[inSliderId][2] = 1;  // [2] tells it to remove the slider as soon as it comes out of the que
+			//alert("im here");
+			//aAllSliders[inSliderId][1] = 0;
+		}
+
+		// return cube to solid black
+		document["cube_" + inSliderId].src = imgCubeBlack.src;
+	}
+
+	function init() {
+		action = setInterval("setSlider()",inRepeatSpeed)
+	}
+
+</script>
+</head>
+<body bgcolor="ffffff" onLoad="init()">
+<div id="Layer1" STYLE="position:absolute; width:525; height:193; z-index:1; left: 20; top: 20;">
+<img src="/img/gen4/top_left.gif">
+</div>
+
+
+<div id="Layer2" STYLE="position:absolute; width:48; height:600; z-index:3; left: 0; top: 156;">
+	<table width="48" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td bgcolor="ffffff" width="47" align="center" valign="top">
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_1">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_2">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_3">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_4">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_5">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_6">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_7">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_8">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_9">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_10">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_11">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_12">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_13">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_14">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_15">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_16">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_17">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_18">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_19">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_20">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_21">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_22">&nbsp;<br>
+				<img src="/img/gen4/pixel_grey.gif" width="10" height="10" name="speed_23">&nbsp;<br>
+			</td>
+			<td bgcolor="ffffff" height="600" align="right" valign="top" width="1"><img src="/img/gen4/pixel_black.gif" height="600" width="1"></td>
+		</tr>
+	</table>
+</div>
+
+
+<div id="Layer3" STYLE="position:absolute; width:300; height:600; z-index:3; left: 545; top: 40;">
+<table width="300" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td bgcolor="ffffff" width="25">
+			<img src="/img/gen4/pixel_black.gif" height="600" width="1">
+		</td>
+		<td valign="top" width="275" bgcolor="ffffff">
+			<a href="http://grilledcheese.com/c/listfont.pl/previews=false/text=false/details=no.htm" onMouseOver="presentSlider(0)" onMouseOut="removeSlider(0)"><img src="/img/gen4/cube_black.gif" border="0" name="cube_0"></a><br>
+			<a href="http://grilledcheese.com/c/static.pl/page=faqs" onMouseOver="presentSlider(1)" onMouseOut="removeSlider(1)"><img src="/img/gen4/cube_black.gif" border="0" name="cube_1"></a><br>
+			<a href="http://www.teacurran.com" onMouseOver="presentSlider(2)" onMouseOut="removeSlider(2)"><img src="/img/gen4/cube_black.gif" border="0" name="cube_2"></a><br>
+			<a href="http://grilledcheese.com/c/static.pl/page=book" onMouseOver="presentSlider(3)" onMouseOut="removeSlider(3)"><img src="/img/gen4/cube_black.gif" border="0" name="cube_3"></a><br>
+			<a href="http://grilledcheese.com/c/static.pl/page=updates" onMouseOver="presentSlider(4)" onMouseOut="removeSlider(4)"><img src="/img/gen4/cube_black.gif" border="0" name="cube_4"></a><br>
+			<a href="http://www.fontlinks.com" target="_blank" onMouseOver="presentSlider(5)" onMouseOut="removeSlider(5)"><img src="/img/gen4/cube_black.gif" border="0" name="cube_5"></a><br>
+		</td>
+	</tr>
+</table>
+</div>
+
+
+<div id="slide_fonts" STYLE="position:absolute; width:229; height:33; z-index:2; left: 550; top: 165;">
+<img src="/img/gen4/slide_fonts.gif">
+</div>
+<div id="slide_about" STYLE="position:absolute; width:229; height:33; z-index:2; left: 550; top: 165;">
+<img src="/img/gen4/slide_about.gif">
+</div>
+<div id="slide_tea" STYLE="position:absolute; width:229; height:33; z-index:2; left: 550; top: 165;">
+<img src="/img/gen4/slide_tea.gif">
+</div>
+<div id="slide_guestbook" STYLE="position:absolute; width:229; height:40; z-index:2; left: 550; top: 165;">
+<img src="/img/gen4/slide_guestbook.gif">
+</div>
+<div id="slide_updates" STYLE="position:absolute; width:229; height:40; z-index:2; left: 550; top: 165;">
+<img src="/img/gen4/slide_updates.gif">
+</div>
+<div id="slide_links" STYLE="position:absolute; width:229; height:33; z-index:2; left: 550; top: 165;">
+<img src="/img/gen4/slide_links.gif">
+</div>
+
+<div id="main" STYLE="position:absolute; width:497; height:33; z-index:2; left: 48; top: 205;">
+	<!--- %MAIN% --->
+	<center>
+		<img src="/img/gen4/pixel_black.gif" height="1" width="300">
+		<FORM METHOD=post action=http://scripts.dreamhost.com/add_list.cgi>
+    	<INPUT type=hidden name=list 			value="CheeseMailing">
+   		<INPUT type=hidden name=url 			value="http://grilledcheese.com/c/mailing.pl?m=1">
+    	<INPUT type=hidden name=unsuburl 		value="http://grilledcheese.com/c/mailing.pl?m=3">
+    	<INPUT type=hidden name=alreadyonurl 		value="http://grilledcheese.com/c/mailing.pl?m=5">
+    	<INPUT type=hidden name=notonurl 		value="http://grilledcheese.com/c/mailing.pl?m=4">
+    	<INPUT type=hidden name=invalidurl 		value="http://grilledcheese.com/c/mailing.pl?m=6">
+    	<INPUT type=hidden name=domain 			value="grilledcheese.com">
+    	<INPUT type=hidden name=emailit 		value="1">
+		<span class="standardBold">
+		<B>Mailing List:</B>&nbsp;&nbsp;<INPUT NAME="address" TYPE="text" size=15 maxlength=60>&nbsp;&nbsp;<INPUT TYPE="submit" VALUE="go">
+		</span>
+		<br><br>
+		<A href="mailto:tea@grilledcheese.com">Email Me</a>
+		<br><br>
+		<img src="/img/toasters.gif">
+		<br><br>
+	</center>
+</div>

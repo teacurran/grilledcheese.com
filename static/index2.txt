@@ -1,0 +1,13 @@
+N O T H I N G
+<CENTER>
+<TABLE WIDTH=100%>
+	<TR>
+		<TD>
+		<FONT SIZE=+1><B>7.5.99</B></FONT>
+		<BLOCKQUOTE>
+			I don't know what happened this weekend, all of a sudden Some of my scripts stopped working and the site wouldn't load.  I think I have everything all set now, If something still isn't working please <A Href="mailto:tea@grilledcheese.com">Let Me Know</A>.  Thanks<BR><B>-TeA</B><BR>
+		</BLOCKQUOTE>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>

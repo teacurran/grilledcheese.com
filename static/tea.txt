@@ -1,0 +1,62 @@
+GrilledCheese.com: Your Host, TeA.
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=445>
+	<TR>
+		<TD WIDTH=133>&nbsp;</TD>
+		<TD COLSPAN=2 BGCOLOR="#000000">&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=133 VALIGN="TOP" HEIGHT=423 ALIGN="RIGHT">
+			<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=133>
+				<TR>
+					<TD ALIGN="RIGHT"><IMG SRC="/img/gen2/cyberpunk_clipped.gif" WIDTH=133 HEIGHT=423></TD>
+				</TR>
+				<TR>
+					<TD BGCOLOR="#000000" COLSPAN=2>&nbsp;</TD>
+				</TR>
+			</TABLE>
+		</TD>
+		<TD BGCOLOR="#000000" WIDTH=8>&nbsp;</TD>
+		<TD VALIGN="TOP" ALIGN="CENTER">
+			<TABLE CELLPADDING=5 CELLSPACING=5 BORDER=0>
+				<TR>
+					<TD>
+						<FONT FACE="impact,airal,helvetica" SIZE=+2>TeA Curran</FONT><BR>
+						This is about as close as I'm going to get to having a homepage
+						here on the web.  I figured I might as well have something about
+						myself for anyone thats curious.  So here Goes.  All About TeA:<BR>
+						<UL>
+						<LI>I live in Taunton MA.<BR>
+						<LI>I work in Somerville MA. (Davis Square to be exact).  Somerville is just
+						outside boston, two T stops from harvard incase you were wondering.<BR>
+						<LI>I work at SoundStone.com Inc. coding webpages.  You guessed it,
+						<A Href="http://www.soundstone.com/scripts/index.cfm?rfd=666&rfn=1">SoundStone.com</A>
+						and the not so obvious <A Href="http://www.rock.com/scripts/index.cfm?rfd=666&rfn=1">Rock.com</A>.
+						<LI>I like computers, programming, pee wee, inline skating, and graffiti art.
+						<LI>I'm really into a lot of music, someday when I get time I'll make a music page.
+						Currently Listening to: Sheep on Drugs.
+						<LI>I drive a white VW Jetta.
+						<LI>I'm in endless persuit of big pants.
+						<LI>I'm really anal about my html, I'm messy about everything else in life.
+						<LI>There are <A Href="http://www.tacoland.com/img/tea/" Target="new">Some Pictures of Me</A> online.  Some are real old, some are not.  That is all.
+						</OL>
+						Some Other Stuff:<BR>
+						<UL>
+						<LI>This site was written in perl useing <A href="http://www.multiedit.com/">MultiEdit 8.0</A>.
+						No wysiwyg editors here!
+						<LI>I also use <A Href="http://www.coldfusion.com">Cold Fusion Studio</A> for debugging some Cold Fusion Code.
+						<LI>I make fonts and some graphics on a Macintosh Performa 6360 with a whopping 64 megs of ram.
+						<LI>Most code was written on a HP Pavillion 8390 with a PentiumII 450 processor and 256 megs of ram running Windows NT 4.0.
+						<LI>I also use a Dell Dimension with a PentiumII 350 and 96 megs of ram.
+						<LI>More recently Ive been useing a generic Pentium 200 Running Linux for some C++ coding, but no C++ has yet been used on this site.
+
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=133>&nbsp;</TD>
+		<TD COLSPAN=2 BGCOLOR="#000000">&nbsp;</TD>
+	</TR>
+
+</TABLE>

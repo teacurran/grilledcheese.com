@@ -1,0 +1,65 @@
+GrilledCheese.com: Link Me
+
+<CENTER>
+<TABLE WIDTH=425 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD>
+<CENTER>
+<FONT SIZE=+3 FACE="impact,airal,helvetica"><B>Link Me Baby</B></FONT>
+</CENTER>
+<BR>
+
+If you like and/or use my fonts and you feeling like being super nice to me, please use
+one of the fine hand-crafted images on this site to link to me from your site.  Or just use
+them on your site and don't link to me.  Or just look at them and imagine you had a website.  Whatever.
+<BR><BR>
+If you link to me, don't forget to <A Href="mailto:tea@grilledcheese.com">tell me</A>.
+
+<BR><BR>
+And if your a super fancy and make me some more images for me to put here, I'll give you a big kiss. (sorry, no tongue).
+
+<CENTER>
+<BR><BR>
+
+<A Href="/link/img/a_funk.gif"><IMG SRC="/link/img/a_funk.gif" BORDER=2></A>
+<A Href="/link/img/a_gc.gif"><IMG SRC="/link/img/a_gc.gif" BORDER=2></A>
+<A Href="/link/img/a_fonts.gif"><IMG SRC="/link/img/a_fonts.gif" BORDER=2></A>
+<A Href="/link/img/a_cheese.gif"><IMG SRC="/link/img/a_cheese.gif" BORDER=2></A>
+
+<BR><BR>
+
+<A Href="/link/img/1.gif"><IMG SRC="/link/img/1.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/2.gif"><IMG SRC="/link/img/2.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/3.gif"><IMG SRC="/link/img/3.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/4.gif"><IMG SRC="/link/img/4.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+
+<BR><BR>
+
+<A Href="/link/img/mixer4.gif"><IMG SRC="/link/img/mixer4.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/mixer5.gif"><IMG SRC="/link/img/mixer5.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/mixer6.gif"><IMG SRC="/link/img/mixer6.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/mixer1.gif"><IMG SRC="/link/img/mixer1.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/mixer2.gif"><IMG SRC="/link/img/mixer2.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/mixer3.gif"><IMG SRC="/link/img/mixer3.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+
+<BR><BR>
+
+<A Href="/link/img/5.gif"><IMG SRC="/link/img/5.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/6.gif"><IMG SRC="/link/img/6.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+
+<BR><BR>
+
+<A Href="/link/img/a_gc.gif"><IMG SRC="/link/img/a_gc.gif" BORDER=2></A>
+<A Href="/link/img/a_fonts.gif"><IMG SRC="/link/img/a_fonts.gif" BORDER=2></A>
+
+<BR><BR>
+
+<A Href="/link/img/7.gif"><IMG SRC="/link/img/7.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+<A Href="/link/img/8.gif"><IMG SRC="/link/img/8.gif" HEIGHT=32 WIDTH=32 BORDER=2></A>
+
+<BR><BR>
+</CENTER>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>

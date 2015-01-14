@@ -1,0 +1,36 @@
+10.19.00 - 10:00 AM - DSL installed and working at 300k
+10.23.00 - 4:00 PM - first noticed dsl was down, now sure for how long.
+10.24.00 - Talked with dave, told that it was just them upgrading my speed.
+10.25.00 - Told by dave that it was still them upgrading things, would be working soon.
+10.26.00 - began talking to travis
+unknown date - NAS showed up, an hour and a half late.  Thought he could get it working, but was unable to.  said it was probably a splice line fault. Opened ticket with verizon.
+11.2.00 8:00 AM - verizon failed to show for testing
+11.6.00 3:25 PM - Ping success, telnet to router success
+11.6.00 3:30 PM - Ping Failure
+11.7.00 8:00 AM - NAS failed to show for testing
+11.8.00 4:00 - Travis said it will be up within 24 hours, they just needed to replace a pipe at the c/o
+11.9.00 - No contact - Line still down
+11.10.00 8:00 AM - TechMeet failed, NAS didn't show. Verizon did. No one answered at Danick all day.
+11.10.00 12:00 PM - Told by danick that travis had just gone out to lunch, be back in 30 min.
+11.10.00 12:30 PM - 7:00 PM - No answer on any extension at Danick
+11.10.00 1:00 PM - Talked to people at NAS 1800 NEED-DSL. was told that their computers were down do they couldnt dispatch a tech all day. 
+11.13.00 11:00 AM - Called Danick, told travis would be in at 12:00 PM
+11.13.00 12:30 PM - Left message with travis asking him to call me asap.
+11.13.00 2:00 PM - Talked to danick (Gregor?), told that travis was out sick.  Told i would be called with more details within the hour.
+11.13.00 3:00 PM - Called by Gregor, told that he passed my info to travis at home and travis would look into it.  Said he would call when he heard something back from travis.  Never called back.
+11.14.00 12:00 PM - Told Travis was with a customer.
+11.14.00 12.54 PM - Talked to david nathans. Told that verison would give a status update a week from friday (11/17/00) 
+He also said that they "fired" Network Access Solutions.  WHen pressed, he told me to call NAS and say I was from danick systems to get status updates.
+11.15.00 11:30 AM - Called NAS - she told me she could ping my machine..   amazing, i needed to call someone to tell me this, line is working. 
+11.17.00 12:20 AM - 3:30 AM Line went down
+11.27.00 3:13 PM - Called nas and asked about line speed upgrade.
+12.05.00 12:00 PM - Called nas and asked for reverse dns to be set up, they said it would take a couple hours.
+12.05.00 4:10 PM - called nas to check up on the reverse dns, its still not working.. guy doesnt seem to know what dns is.
+	64.67.22.106 - web1.distroy.com
+	64.67.22.107 - web2.distroy.com
+	64.67.22.108 - web3.distroy.com
+	64.67.22.109 - web4.distroy.com
+
+order number : 31760 - Network access solutions
+
+15846

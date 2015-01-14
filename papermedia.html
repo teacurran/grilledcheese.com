@@ -1,0 +1,625 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<!--
+ Copyright 1998, Papermedia, Inc.
+ All code and artwork by Papermedia, Inc. of San Francisco.
+ http://www.papermedia.com
+-->
+<STYLE>
+
+#stBox   {position:absolute;
+       top:40;
+       left:20%;
+       color:lime;
+       font-family:"Courier";
+       font-size:12px}
+
+#cntnr   {position:absolute;
+       top:100;
+       left:50%;
+       width:350;
+       height:100;
+       clip:rect(0,341,14,0);
+       font-family:"Courier";
+       font-size:12px}
+P       {color:lime;
+         fontFamily:"Courier";
+         fontSize:12px;
+         textAlign:left;}
+
+A:link          { color: LIME}
+A:active        { color: LIME}
+A:visited       { color: LIME}
+
+</STYLE>
+
+<SCRIPT LANGUAGE=javaScript>
+
+var skipIntro
+
+function chkCookie(){
+   skipIntro = ' Welcome Back to Papermedia'+
+         ' Would you like to skip this intro?';
+   Prep();
+   if (document.cookie){
+      if(confirm(skipIntro))
+         setTimeout('writeOPN();',100);
+      else{
+         setTimeout('writeSt1(0);',100);
+      }
+   }
+   else {
+      whenToKill = new Date();
+      whenToKill.setMonth(whenToKill.getMonth()+1);
+      document.cookie = 'version=' + escape(document.lastModified) +
+         '; expires=' + whenToKill.toGMTString();
+      writeSt1(0);
+   }
+}
+
+// *************** BEGIN ENV CHECKING ************************
+
+var bAgent =  navigator.userAgent;  //macro with alot of userAgent
+var fl = '';                  //shockwave flash 3.0 plug-in
+var on = '';                  //the name of the operating system
+var bn = '';                  //browser name
+var pn = ' 80 ';
+var hn = ' 165.247.2.33 ';
+
+var ie = (document.all) ? 1:0;      //exists if we're in IE
+var ns = (document.layers) ? 1:0;   //exists if we're in Netscape
+var blnkTmp = 0;              //counter for blinking text
+var crsrCnt = 0;              //another blinking cursor counter
+var sn = (screen.availWidth+'x'+screen.availHeight);  //screen size
+if(ns) var vn = parseFloat(bAgent.substring(8,12));      //browserVersionNumbers
+if(ie) var vn = parseFloat(bAgent.substring(30,34));
+      vn+='';
+fblnk1 = null;                // timeout variable for final blink(on)
+fblnk2 = null;                // timeout variable for final blink(off)
+var bVar = 12;                // holds clipBottom number for cntr div
+
+// checks for Mac or Windows NT/95
+ function chkOS(){
+   if ((bAgent.indexOf('Windows 95') > 0) || (bAgent.indexOf('Win95') > 0)){
+      on = 'Windows 95';
+      return;
+   }
+   else if ((bAgent.indexOf('Windows 98') > 0) || (bAgent.indexOf('Win98') > 0)){
+      on = 'Windows 98';
+      return;
+   }
+   else if ((bAgent.indexOf('Windows NT') > 0) || (bAgent.indexOf('WinNT') > 0)){
+      on = 'Windows NT';
+      return;
+   }
+   else if ((bAgent.indexOf("Macintosh") > 0) || (bAgent.indexOf("Mac") > 0)){
+      on = "Macintosh";
+      return;
+   }
+   else if (bAgent.indexOf("SunOS") > 0){
+      on = "Sun OS";
+      return;
+   }
+ }
+
+// checks for Browser Name (because there are others);
+function chkBN(){
+   if (ie){
+       if (bAgent.indexOf('AOL') > 0){
+         bn = "AOL -- Internet Explorer Engine";
+         return;
+      }
+      else{
+         bn = "Microsoft Internet Explorer";
+         return;
+      }
+   }
+   else if (ns){
+      bn = "Netscape Communicator";
+      return;
+   }
+}
+
+//checks plug-In
+ function chkPI(){
+   if(ns){
+      if (navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"])
+         fn = 'installed... enabled';
+      else
+         fn = 'fail plug-in check';
+   }
+   if (ie && fl == 0)
+      fn = 'active-x capable';
+ }
+
+chkOS();
+chkBN();
+chkPI();
+
+// variables for stBox1 output
+   var st1 = ' **** Inspecting Environmental Variables ****';
+   var st1L = st1.length;
+   var   st1Tmp = '';
+   var st1Cntr = 0;
+
+// variables for brBox output
+   var br = 'browser type:&nbsp;';
+   var brL = (eval(br.length+bn.length));
+   var brTmp = '';
+   var brCntr = 0;
+
+// variables for vrBox output
+   var vr = 'browser version:&nbsp;';
+   var vrL = (eval(vr.length+vn.length));
+   var vrTmp = '';
+   var vrCntr = 0;
+
+// variables for osBox output
+   var os = 'operating system:&nbsp;';
+   var osL = (eval(os.length+on.length));
+   var osTmp = '';
+   var osCntr = 0;
+
+// variables for flBox output
+   var fl = 'shockwave flash?:&nbsp;';
+   var flL = (eval(fl.length+fn.length));
+   var flTmp = '';
+   var flCntr = 0;
+
+// variables for flBox output
+   var ss = 'available screen size:&nbsp;';
+   var ssL = (eval(ss.length+sn.length));
+   var ssTmp = '';
+   var ssCntr = 0;
+
+// variables for stBox2 output
+   var st2 = '**** Connecting ****';
+   var st2L = st2.length;
+   var st2Tmp = '';
+   var st2Cntr = 0;
+
+// variables for coBox output
+   var co = ' **** Connected ****';
+   var coL = co.length;
+   var   coTmp = '';
+   var coCntr = 0;
+
+// variables for ipBox output
+   var ip = 'host:&nbsp;';
+   var ipL = (eval(ip.length+hn.length));
+   var ipTmp = '';
+   var ipCntr = 0;
+
+// variables for poBox output
+   var po = 'using port number:&nbsp;';
+   var poL = (eval(po.length+pn.length));
+   var   poTmp = '';
+   var poCntr = 0;
+
+// variables for ldBox output
+   var ld = 'Loading paper(media) v.1.5 ';
+   var ldL = ld.length;
+   var   ldTmp = '';
+   var ldCntr = 0;
+
+
+// ****************** END VARIABLE DECLARATIONS ************************
+function Prep(){
+   if(ie){
+      var ht = document.body.offsetHeight;
+      var wt = document.body.offsetWidth;
+      movTp = eval((ht/2) - 50);
+      movLt = eval((wt/2) - 340);
+      if (movLt < 10) movLt = 10;
+      procHt = eval(ht - 36);
+      movNav.style.pixelLeft = movLt;
+      movNav.style.pixelTop = movTp;
+      stBox.style.pixelLeft = movLt;
+      stBox.style.pixelTop = movTp - 65;
+      cntnr.style.pixelTop = procHt;
+      document.all.movNav.style.visibility = 'visible';
+      if (on != 'Macintosh')
+         window.ieCache.location = './ieCache.html';
+   }
+   if(ns){
+      var wt = window.innerWidth;
+      var ht = window.innerHeight;
+      movTp = eval((ht/2) - 50);
+      movLt = eval((wt/2) - 340);
+      if (movLt < 10) movLt = 10;
+      procHt = eval(ht - 18);
+      document.movNav.top = movTp;
+      document.movNav.left = movLt;
+      document.stBox.top = movTp - 65;
+      document.stBox.left = movLt; - 65;
+      document.cntnr.top = procHt;
+      document.movNav.visibility = 'visible';
+   }
+}
+
+function writeSt1(x){
+   if (st1Tmp.length < st1L && x == 0){
+      st1Tmp += st1.charAt(st1Cntr);
+      st1Cntr++;
+      writeOut('stBox',st1Tmp);
+      setTimeout('writeSt1(0);',.5);
+      return;
+   }
+   if (blnkTmp <= 3){
+      if (x == 0){
+         writeOut('stBox','');
+         blnkTmp++;
+         setTimeout('writeSt1(1)',300);
+      }
+      if (x == 1){
+         writeOut('stBox',st1Tmp);
+         blnkTmp++;
+         setTimeout('writeSt1(0)',300);
+      }
+   }
+   else {
+      blnkTmp = 0;
+      writeOut('brBox',br,1);
+      brTmp+= br;
+      setTimeout('writeBR()',500);
+   }
+}
+
+function writeBR(){
+   if (brTmp.length < brL){
+      brTmp += bn.charAt(brCntr);
+      brCntr++;
+      writeOut('brBox',brTmp,1);
+      setTimeout('writeBR();',.5);
+   }
+   else{
+      dnThis();
+      writeOut('vrBox',vr,1);
+      vrTmp+= vr;
+      setTimeout('writeVR()',500);
+   }
+}
+
+function writeVR(x){
+   if (vrTmp.length < vrL){
+      vrTmp += vn.charAt(vrCntr);
+      vrCntr++;
+      writeOut('vrBox',vrTmp,1);
+      setTimeout('writeVR(0);',.5);
+      return;
+   }
+   else if (x == 0)
+      setTimeout('writeVR(1);',800);
+   else if (x == 1){
+      dnThis();
+      writeOut('osBox',os,1);
+      osTmp+= os;
+      setTimeout('writeOS()',1000);
+   }
+}
+
+function writeOS(){
+   if (osTmp.length < osL){
+      osTmp += on.charAt(osCntr);
+      osCntr++;
+      writeOut('osBox',osTmp,1);
+      setTimeout('writeOS();',.5);
+   }
+   else{
+      dnThis();
+      writeOut('flBox',fl,1);
+      flTmp+= fl;
+      setTimeout('writeFL()',500);
+   }
+}
+
+function writeFL(){
+   if (flTmp.length < flL){
+      flTmp += fn.charAt(flCntr);
+      flCntr++;
+      writeOut('flBox',flTmp,1);
+      setTimeout('writeFL();',.5);
+   }
+   else{
+      dnThis();
+      writeOut('ssBox',ss,1);
+      ssTmp+= ss;
+      setTimeout('writeSS()',500);
+   }
+}
+
+function writeSS(){
+   if (ssTmp.length < ssL){
+      ssTmp += sn.charAt(ssCntr);
+      ssCntr++;
+      writeOut('ssBox',ssTmp,1);
+      setTimeout('writeSS();',.5);
+   }
+   else {
+      setTimeout('writeSt2(0)',500);
+   }
+}
+
+function writeSt2(x){
+   if (st2Tmp.length < st2L && x == 0){
+      st2Tmp += st2.charAt(st2Cntr);
+      st2Cntr++;
+      writeOut('stBox',st2Tmp);
+      setTimeout('writeSt2(0);',.5);
+      return;
+   }
+   else if (blnkTmp <= 4){
+      if (x == 0){
+         writeOut('stBox','');
+         blnkTmp++;
+         setTimeout('writeSt2(1);',350);
+      }
+      else if (x == 1){
+         writeOut('stBox',st2Tmp);
+         blnkTmp++;
+         setTimeout('writeSt2(0);',350);
+      }
+   }
+   else {
+      writeOut('stBox',co);
+      crsrCnt = 0;
+      blnkTmp = 0;
+      setTimeout('writeCO();',800);
+   }
+}
+
+function writeCO(){
+      dnThis();
+      writeOut('ipBox',ip,1);
+      ipTmp+= ip;
+      setTimeout('writeIP();',500);
+}
+
+function writeIP(){
+   if (ipTmp.length < ipL){
+      ipTmp += hn.charAt(ipCntr);
+      ipCntr++;
+      writeOut('ipBox',ipTmp,1);
+      setTimeout('writeIP();',.5);
+   }
+   else{
+      dnThis();
+      writeOut('poBox',po,1);
+      poTmp += po;
+      setTimeout('writePO();',500);
+   }
+}
+
+function writePO(){
+   if (poTmp.length < poL){
+      poTmp += pn.charAt(poCntr);
+      poCntr++;
+      writeOut('poBox',poTmp,1);
+      setTimeout('writePO();',.5);
+   }
+   else{
+      cacheMo();
+      setTimeout('writeLD();',500);
+   }
+}
+
+function writeLD(x){
+   if (ldTmp.length < ldL){
+      ldTmp += ld.charAt(ldCntr);
+      ldCntr++;
+      writeOut('stBox',ldTmp);
+      setTimeout('writeLD(0);',.5);
+   }
+   else if ((blnkTmp <= 3) && (crsrCnt <= 40)){
+      if(x == 0){
+         ldTmp2 = ldTmp;
+         ldTmp2 += '|';
+         writeOut('stBox',ldTmp2);
+         crsrCnt++;
+         setTimeout('writeLD(1);',.5);
+      }
+      else {
+         ldTmp2 = ldTmp;
+         ldTmp2 += '-';
+         writeOut('stBox',ldTmp2);
+         crsrCnt++;
+         setTimeout('writeLD(0);',.5);
+      }
+   }
+   else if (crsrCnt > 40){
+      writeOut('stBox',ldTmp);
+      setTimeout('writeOPN()',800);
+   }
+}
+
+function writeOPN(){
+   if ((screen.availWidth<800)||(screen.availHeight<600)){
+      if(ie){
+         if (on == 'Macintosh')
+            window.open('./h_mac.html', '', 'width='+screen.width+',height='+screen.height+',scrollbars=no,resizable=no,toolbar=no,top=0,left=0');
+         else
+            window.open('./h_ie.html', '',  'width='+(screen.availWidth-15)+',height='+screen.availHeight+',scrollbars=no,resizable=no,toolbar=no,top=0,left=0');
+      }
+      else if(ns) window.open('./h_ns.html', '', 'outerWidth='+screen.width+',outerHeight='+screen.height+',top=0,left=0');
+   }
+   else{
+      obj = 'stBox';
+      txt = 'Fullscreen? [y/n]&nbsp;';
+      writeOut(obj,txt);
+      setTimeout('fnBlnk(1)',500);
+   }
+}
+
+function fnBlnk(x){
+   self.focus();
+   obj = 'stBox';
+   document.onkeypress = keyHandler;
+   if (ns) window.captureEvents(Event.KEYDOWN);
+   if (x == 1){
+      txt1 = 'Fullscreen? [<A HREF="javascript:launch(121);">y<\/A>/<A HREF="javascript:launch(78);">n<\/A>]&nbsp;<B>|<\/B>';
+      writeOut(obj,txt1);
+      fblnk1 = window.setTimeout('fnBlnk(0)',500);
+   }
+   if (x == 0){
+      txt2 = 'Fullscreen? [<A HREF="javascript:launch(121);">y<\/A>/<A HREF="javascript:launch(78);">n<\/A>]&nbsp;<B><\/B>';
+      writeOut(obj,txt2);
+      fblnk2 = window.setTimeout('fnBlnk(1)',500);
+   }
+}
+var prf = '<P STYLE="font-size:10px;font-family:Courier;">';
+
+function writeOut(obj,txt,q){
+   if(ie)
+      document.all[obj].innerHTML = txt
+   if(ns){
+      if (q == 1){
+         document.cntnr.document[obj].document.write('<P>'+txt);
+         document.cntnr.document[obj].document.close();
+      }
+      else{
+         document[obj].document.write('<P>'+txt);
+         document[obj].document.close();
+      }
+   }
+}
+
+function keyHandler(x) {
+      if(ie)
+         launch(window.event.keyCode);
+      if(ns){
+         var keycode = x.which;
+         launch(keycode);
+      }
+}
+
+function launch(keyCode) {
+   if ((keyCode == 121) || (keyCode == 89)){  // y or Y
+      clearTimeout(fblnk1);
+      clearTimeout(fblnk2);
+      if(ie){
+         if (on == 'Macintosh')
+            window.open('./h_mac.html', '', 'width='+screen.width+',height='+screen.height+',scrollbars=no,resizable=no,toolbar=no,top=0,left=0');
+         else
+            window.open('./h_ie.html', '',  'width='+(screen.availWidth-15)+',height='+screen.availHeight+',scrollbars=no,resizable=no,toolbar=no,top=0,left=0');
+      }
+      else if(ns) window.open('./h_ns.html', '', 'outerWidth='+screen.width+',outerHeight='+screen.height+',top=0,left=0');
+      endIt();
+      document.location='./still.html';
+   }
+   else if ((keyCode == 78) || (keyCode == 110)){  // n or N
+      clearTimeout(fblnk1);
+      clearTimeout(fblnk2);
+      if (ns) window.open("./h_ns.html", "", "width=800,height=600,scrollbars=no,resizable=no,toolbar=no");
+      else if(ie){
+         if (on == 'Macintosh')
+            window.open("./h_mac.html", "", "width=800,height=600,scrollbars=no,resizable=no,toolbar=no");
+         else
+            window.open("./h_ie.html", "", "width=800,height=600,scrollbars=no,resizable=no,toolbar=no");
+      }
+      endIt();
+      document.location = './still.html';
+   }
+}
+
+function endIt(){
+   if(ns){
+      document.onkeypress = 0;
+      document.onkeydown=0;
+      window.releaseEvents(Event.KEYDOWN);
+   }
+   else
+      document.onkeypress='';
+   return false;
+}
+
+function dnThis(){
+   bVar += 14;
+   if(ie){
+      cntnr.style.clip = "rect("+0+"px "+341+"px "+bVar+"px "+0+"px)";
+      document.all.cntnr.style.pixelTop -= 14;
+   }
+   if(ns){
+      document.cntnr.clip.bottom = bVar;
+      document.cntnr.top -= 13;
+   }
+}
+
+var   img0,img1,img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16,img17,img18,img19 = null;
+
+if ((ns) || (on == 'Macintosh')){
+   img0= new Image(43,46);img0.src = "./images/gif0H.gif";
+   img2= new Image(43,46);img2.src = "./images/gif2H.gif";
+   img3= new Image(43,46);img3.src = "./images/gif3H.gif";
+}
+
+
+function cacheMo(){
+ if ((ns) || (on == 'Macintosh')){
+   img1= new Image(43,46);img1.src = "./images/gif1H.gif";
+   img4= new Image(43,46);img4.src = "./images/gif4H.gif";
+   img5= new Image(43,46);img5.src = "./images/gif5H.gif";
+ }
+   img6= new Image(43,46);img6.src = "./about/nav/images/bgLt_about.gif";
+   img7= new Image(43,46);img7.src = "./services/nav/images/bgLt_services.gif";
+   img8= new Image(43,46);img8.src = "./e-comm/nav/images/bgLt_e-comm.gif";
+   img9= new Image(43,46);img9.src = "./process/nav/images/bgLt_process.gif";
+   img10= new Image(43,46);img10.src = "./clients/nav/images/bgLt_clients.gif";
+   img11= new Image(43,46);img11.src = "./contact/nav/images/bgLt_contact.gif";
+
+   img12= new Image(43,46);img12.src = "./nav/images/backL.gif";
+   img13= new Image(43,46);img13.src = "./nav/images/fwdL.gif";
+   img14= new Image(43,46);img14.src = "./nav/images/closeL.gif";
+   img15= new Image(43,46);img15.src = "./nav/images/navBtnL.gif";
+
+   img16= new Image(43,46);img16.src = "./nav/images/backH.gif";
+   img17= new Image(43,46);img17.src = "./nav/images/fwdH.gif";
+   img18= new Image(43,46);img18.src = "./nav/images/closeH.gif";
+   img19= new Image(43,46);img19.src = "./nav/images/navBtnH.gif";
+}
+
+
+</SCRIPT>
+
+<TITLE>welcome to paper(media)</TITLE>
+</HEAD>
+<BODY BGCOLOR="BLACK" TEXT="LIME" onLoad="javascript:chkCookie();">
+<LAYER NAME=movNav TOP=200 LEFT=100 VISIBILITY=hidden>
+   <NOLAYER>
+   <DIV ID=movNav STYLE="position:absolute;top:20;left:100;visibility:hidden"></NOLAYER><IMG
+      SRC="./images/splashimage.gif"
+      WIDTH=640 HEIGHT=75 BORDER=0><NOLAYER></DIV>
+   <IFRAME NAME=ieCache SRC='./init.html' STYLE="width:10;height:10;visibility:hidden"></IFRAME>
+   </NOLAYER>
+</LAYER>
+
+<!-- Dynamic Output Boxes -->
+<NOLAYER>
+      <DIV ID=cntnr>
+         <DIV STYLE="position:relative;" ID=brBox></DIV>
+         <DIV STYLE="position:relative;" ID=vrBox></DIV>
+         <DIV STYLE="position:relative;" ID=osBox></DIV>
+         <DIV STYLE="position:relative;" ID=flBox></DIV>
+         <DIV STYLE="position:relative;" ID=ssBox></DIV>
+         <DIV STYLE="position:relative;" ID=ipBox></DIV>
+         <DIV STYLE="position:relative;" ID=poBox></DIV>
+         <DIV STYLE="position:relative;" ID=opn></DIV></DIV>
+      <DIV ID=stBox></DIV>
+</NOLAYER>
+
+<LAYER NAME=stBox TOP=100 LEFT=100></LAYER><BR>
+
+<LAYER NAME=cntnr TOP=100 LEFT=50% WIDTH=350 HEIGHT=100>
+   <LAYER NAME=brBox></LAYER>
+   <LAYER TOP=12 NAME=vrBox></LAYER>
+   <LAYER TOP=24 NAME=osBox></LAYER>
+   <LAYER TOP=36 NAME=flBox></LAYER>
+   <LAYER TOP=48 NAME=ssBox></LAYER>
+   <LAYER TOP=60 NAME=ipBox></LAYER>
+   <LAYER TOP=72 NAME=poBox></LAYER>
+   <LAYER TOP=84 NAME=opn></LAYER><BR>
+</LAYER>
+
+
+</BODY>
+</HTML>

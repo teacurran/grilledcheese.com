@@ -1,0 +1,61 @@
+GrilledCheese.com: Frequently Asked Questions
+
+<CENTER>
+<TABLE WIDTH=400>
+	<TR>
+		<TD>
+
+						<CENTER>
+						<FONT SIZE=+2 FACE="impact,airal,helvetica"><B>FAQ's</B></FONT>
+						</CENTER>
+						<BR>
+
+						<FONT FACE="airal,helvetica"><B>Why are fonts priced differently?</B></FONT>
+						<BLOCKQUOTE>
+                                    			Fonts are priced based on the number of
+                                    			characters in the font, how long it the font took to
+                                    			create, and whether or not that font is being
+                                    			distributed through other commercial distributors.
+			                                Font prices on grilledcheese.com vary from 1 to 30
+                                    			dollars depending on these factors. 
+						</BLOCKQUOTE>
+
+						<FONT FACE="airal,helvetica"><B>Can I buy fonts online with my credit card?</B></FONT>
+						<BLOCKQUOTE>
+							No, grilledcheese.com currently does not support credit card orders or orders
+							online.  Work is being done to get online ordering, but theres no promise as
+							to when it can be avaliable.  The shopping cart on the site is meant to be
+							used as more of a calculation tool for font pricing.
+						</BLOCKQUOTE>
+
+						<FONT FACE="airal,helvetica"><B>Why can't I add items to my shopping cart?</B></FONT>
+						<BLOCKQUOTE>
+							Make sure that when you click the "order now" button from a font preview page,
+							that you web browser has cookies enabled.  The site needs to use cookies to
+							remember what it is that you have in your shopping cart.  You can enable
+							cookies in the preferences menu of your web browser
+						</BLOCKQUOTE>
+
+						<FONT FACE="airal,helvetica"><B>Can I have one of your commercial fonts for free?</B></FONT>
+						<BLOCKQUOTE>
+							No.
+						</BLOCKQUOTE>
+
+						<FONT FACE="airal,helvetica"><B>Can I trade you pants for fonts?</B></FONT>
+						<BLOCKQUOTE>
+							Kikwear's are good 36+ waist only.  But its probably cheaper to
+							just buy the fonts.
+						</BLOCKQUOTE>
+
+						<FONT FACE="airal,helvetica"><B>Can I Put your fonts on my website?</B></FONT>
+						<BLOCKQUOTE>
+							No.   Please do not put my fonts for download on your website.  This rule
+							applies to both commercial and shareware fonts.  Please put a link to the
+							font instead, that would be great.  There are a few places on the web that
+							I have approved for distributing a few my shareware fonts, but these sites are
+							very scarce.   Questions about this?  <A Href="mailto:tea@grilledcheese.com">Email Me</A>.
+						</BLOCKQUOTE>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>

@@ -1,0 +1,56 @@
+GrilledCheese.com: Contact
+
+<TABLE WIDTH=408 CELLPADDING=0 CELLSPACING=0 BORDER=0>
+	<TR>
+		<TD WIDTH=150>&nbsp;</TD>
+		<TD WIDTH=8>&nbsp;</TD>
+		<TD WIDTH=250 ALIGN="CENTER" VALIGN="TOP">
+			<FONT SIZE=+3 FACE="Impact,Airal,helvetica"><B>Contact</B></FONT>
+		</TD>
+	</TR>
+
+	<TR>
+		<TD BGCOLOR="#000000" WIDTH=100>&nbsp;</TD>
+		<TD BGCOLOR="#000000" WIDTH=8>&nbsp;</TD>
+		<TD WIDTH=300>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=100>&nbsp;</TD>
+		<TD BGCOLOR="#000000" WIDTH=8>&nbsp;</TD>
+		<TD VALIGN="TOP" WIDTH=300>
+			<TABLE CELLPADDING=5 CELLSPACING=5 BORDER=0>
+				<TR><TD>
+			If you wish to contact me for freelance custom type, logo design, website
+			programming (cfml, asp, perl, etc...), anything on
+			this site, or just to chat or question me, you may do
+			so in one of the following ways. <BR><BR>
+			<B>Enail:</B> <BLOCKQUOTE>
+				<B>
+				<A Href="mailto:tea@grilledcheese.com">TeA@grilledcheese.com</A>
+				</B>
+			</BLOCKQUOTE>
+			<B>Mail:</B>
+			<BLOCKQUOTE>
+				<B>
+				TeA Curran<BR>
+				PO BOX 2633<BR>
+				Taunton, MA 02718<BR>
+				</B>
+			</BLOCKQUOTE>
+			<B>ICQ:</B>
+			<BLOCKQUOTE>
+				<B>
+				2227887
+				</B>
+			</BLOCKQUOTE>
+			<B>AOL Instant Messanger:</B>
+			<BLOCKQUOTE>
+				<B>
+				THCalcium2
+				</B>
+			</BLOCKQUOTE>
+				</TD></TR>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>

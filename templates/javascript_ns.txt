@@ -1,0 +1,13 @@
+<SCRIPT language="javascript">
+
+function smut()
+	{
+	document.layers.fontslayer.visibility = "visible";
+	document.layers.fontsback.visibility = "visible";
+	}
+function xxx()
+	{
+	document.layers.fontslayer.visibility = "hidden";
+	document.layers.fontsback.visibility = "hidden";
+	}
+</SCRIPT>
