@@ -4,48 +4,39 @@ GrilledCheese.com: Updates
 	<TR>
 		<TD>
 
-			<B>10.16.99</B>
+			<B>2.20.2015</B>
 			<BLOCKQUOTE>
-			<A Href="http://grilledcheese.com/c/fonts.pl/fname=electro/">ElectroCandy</A>, released today.<BR>
-			Three different styles, 50-100 characters each.<BR>
-			As with all new fonts, please inform me if you have any problems.<BR>
+				I have been going through the process of cleaning up and releasing all my typefaces as Open Source on <a href="https://github.com/teacurran/typography">GitHub</a>.
+				<br/><br/>
+				Please refer to github for the latest copies of all fonts, including formerlly commercial offerings.
 			</BLOCKQUOTE>
-			
-			<B>3.22.99</B>
-			<BLOCKQUOTE>
-			New Font, Ransom Threat can be seen and downloaded at the <A Href="http://www.tacoland.com/ransom">Tacoland Ransom Note Generator</A>.
- 			</BLOCKQUOTE>
 
-			<B>2.20.99</B>
-			<BLOCKQUOTE>
-			I started working on a personal page on my other domain, tacoland.com. <A href="http://www.tacoland.com/tea" TARGET="new">Go there Now!</A>
- 			</BLOCKQUOTE>
-
-			<B>2.13.99</B>
-			<BLOCKQUOTE>
-				Fixed a Laundry list of minor bugs. Broken links and such, Including this page.  There should be a few new fonts coming out in the next week or two depending on how much time I have.  Sign up for the mailing list at the bottom of this page if you wish to be informed when new fonts arrive at grilledcheese.com.
-				<BR>I also added a link to pictures of me off of the tea button on the right.
-			</BLOCKQUOTE>
+                        <B>10.16.99</B>
+                        <BLOCKQUOTE>
+                        <A Href="http://grilledcheese.com/c/fonts.pl/fname=electro">ElectroCandy</A>, released today.<BR>
+                        Three different styles, 50-100 characters each.<BR>
+                        As with all new fonts, please inform me if you have any problems.<BR>
+                        </BLOCKQUOTE>
 
 			<B>2.1.99</B>
 			<BLOCKQUOTE>
 			<B>Mac Users Its Your Lucky Day!  I Added Macintosh Formats of the following fonts:</B>
 				<BLOCKQUOTE>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_711slurpie/d_allinfo.html">711 Slurpee</A><BR>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_basehead/d_allinfo.html">Basehead</A><BR>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_bbthom/d_allinfo.html">Batman Beat The Hell Outta Me</A><BR>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_merker/d_allinfo.html">Merker</A><BR>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_ophake/d_allinfo.html">Ophake</A><BR>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_ravergoggle/d_allinfo.html">Raver Goggles</A><BR>
-				<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_raverkids/d_allinfo.html">Raver Kids</A><BR>
+				<A Href="/c/fonts.pl/fname=711slurpie">711 Slurpee</A><BR>
+				<A Href="/c/fonts.pl/fname=basehead">Basehead</A><BR>
+				<A Href="/c/fonts.pl/fname=bbthom">Batman Beat The Hell Outta Me</A><BR>
+				<A Href="/c/fonts.pl/fname=merker">Merker</A><BR>
+				<A Href="/c/fonts.pl/fname=ophake">Ophake</A><BR>
+				<A Href="/c/fonts.pl/fname=ravergoggle">Raver Goggles</A><BR>
+				<A Href="/c/fonts.pl/fname=raverkids">Raver Kids</A><BR>
 				</BLOCKQUOTE>
 			</BLOCKQUOTE>
 
 			<B>1.30.99</B>
 			<BLOCKQUOTE>
-			<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts.pl/fname=ophake/display=allinfo.html"><IMG SRC="http://www.grilledcheese.com/img/font/preview/ophake.gif" BORDER=0></A>
+			<A Href="/c/fonts.pl/fname=ophake/display=allinfo.html"><IMG SRC="/img/font/preview/ophake.gif" BORDER=0></A>
 			<BR>
-			<B>New Font!, Ophake.  <A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_ophake/d_allinfo.html">Download It Now</A>.</B>
+			<B>New Font!, Ophake.  <A Href="/c/fonts.pl/fname=ophake">Download It Now</A>.</B>
 			<BR>
 			<BR>
 			Also, you can now sign up for the GrilledCheese.com <A href="http://www.grilledcheese.com/cgi-bin/grill-cgi/mailing.pl">Mailing List</A> and get 
@@ -54,18 +45,18 @@ GrilledCheese.com: Updates
 
 			<B>1.25.99</B>
 			<BLOCKQUOTE>
-			<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_merker/d_allinfo.html"><IMG SRC="http://www.grilledcheese.com/img/font/preview/merker.gif" BORDER=0></A>
+			<A Href="/c/fonts.pl/fname=merker"><IMG SRC="/img/font/preview/merker.gif" BORDER=0></A>
 			<BR>
-			<B>New Font!, Merker.  <A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts/fname_merker/d_allinfo.html">Download It Now</A></B><BR>
+			<B>New Font!, Merker.  <A Href="/c/fonts.pl/fname=merker">Download It Now</A></B><BR>
 			</BLOCKQUOTE>
 
 			<B>1.25.99</B>
 			<BLOCKQUOTE>
 			<B>New Format Finally Finished!!!</B><BR>
 			<BR>
-			<A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts.pl/fname=raverkids/display=allinfo.html"><IMG SRC="http://www.grilledcheese.com/img/font/preview/raverkids.gif" BORDER=0></A>
+			<A Href="/c/fonts.pl/fname=raverkids/display=allinfo.html"><IMG SRC="/img/font/preview/raverkids.gif" BORDER=0></A>
 			<BR>
-			<B>New Font!, Raver Kids.  <A Href="http://www.grilledcheese.com/cgi-bin/grill-cgi/fonts.pl/fname=raverkids/display=allinfo.html">Download It Now</A></B><BR>
+			<B>New Font!, Raver Kids.  <A Href="/c/fonts.pl/fname=raverkids/display=allinfo.html">Download It Now</A></B><BR>
 			<BR>
 			I tried to make the site easier to navigate and more informative, <A Href="mailto:tea@grilledcheese.com">Let me know</A> what you think of it.
 			Some things still aren't working completely, theres spelling errors and lack of previews or images.  I'll get to all of that soon
