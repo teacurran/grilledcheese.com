@@ -1,0 +1,11 @@
+# docker compose consisting of 1 service in the main Dockerfile
+# the root directory is mapped to a volume at /app
+
+services:
+  main:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    environment:
