@@ -8,7 +8,7 @@ $main_template_file = "${basedir}${template_dir}${page_template}";
 $fontpreal = "${basedir}img/font/preview/";
 $fontdata = "${basedir}data/font_data.txt";
 
-open (TEMPLATEFILE,"$main_template_file") || die "Can't open '$templatefile': $!\n";
+open (TEMPLATEFILE,"$main_template_file") || die "Can't open '$main_template_file': $!\n";
  @T_LINES=<TEMPLATEFILE>;
 close(TEMPLATEFILE);
 $SIZE=@T_LINES;
