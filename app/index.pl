@@ -1,26 +1,33 @@
 #!/usr/bin/perl
+use strict;
+use warnings;
 
 require ("/app/application.pl");
 
-$pageslocation = "/app/static/updates.txt";
-$main_template_file = "${basedir}${template_dir}${page_template}";
+our $basedir;
+our $template_dir;
+our $page_template;
 
+my $pageslocation = "/app/static/updates.txt";
+my $main_template_file = "${basedir}${template_dir}${page_template}";
 
+my $template;
 undef $/;
 open (TEMPLATEFILE,"$main_template_file");
  $template = <TEMPLATEFILE>;
 close(TEMPLATEFILE);
 
-($header, $footer) = split(/<!--- %MAIN% --->/, $template);
+my ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
 
 open (STATIC,"$pageslocation");
-$maintext = <STATIC>;
+my $maintext = <STATIC>;
 close(STATIC);
 
 $/ = "\n";
-($title_var) = ($maintext =~ /(.*?)\n/);
+my ($title_var) = ($maintext =~ /(.*?)\n/);
 $maintext =~ s/(.*?)\n//;
 
+my $hits_val;
 
 $header =~ s/<!--- %TITLE% --->/$title_var/g;
 $footer =~ s/<!--- %QUOTE% --->/$hits_val/g;

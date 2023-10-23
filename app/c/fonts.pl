@@ -1,7 +1,10 @@
 #!/usr/bin/perl -W
+use strict;
+use warnings;
+use diagnostics;
 use DB_File;
 
-require "../application.pl";
+require "/app/application.pl";
 
 $fname = $FORM{'fname'};
 $foundfont = 1;
@@ -12,7 +15,7 @@ $fontimgreal = "${basedir}img/font/";
 $fontsdbm = "${basedir}data/dbm/fonts";
 $fontdata = "${basedir}data/font_data.txt";
 
-$main_template_file = "${basedir}${template_dir}${page_template}";
+$main_template_file = "/${basedir}${template_dir}${page_template}";
 $content_template_file = "${basedir}${template_dir}fonts.html";
 $downloads_template_file = "${basedir}${template_dir}downloads.html";
 
@@ -29,13 +32,13 @@ for ($i=0;$i<=$SIZE;$i++) {
 
 undef $/;
 
-open (TEMPLATEFILE,"$main_template_file") || die "Can't Open $templatefile: $!\n";
+open (TEMPLATEFILE,"$main_template_file") || die "Can't Open main_template_file: $main_template_file: $!\n";
  $template = <TEMPLATEFILE>;
 close(TEMPLATEFILE);
-open (TEMPLATEFILE,"$content_template_file") || die "Can't Open $content_template_file: $!\n";
+open (TEMPLATEFILE,"$content_template_file") || die "Can't Open content_template_file: $content_template_file: $!\n";
  $content_template = <TEMPLATEFILE>;
 close(TEMPLATEFILE);
-open (TEMPLATEFILE,"$downloads_template_file") || die "Can't Open $downloads_template_file: $!\n";
+open (TEMPLATEFILE,"$downloads_template_file") || die "Can't Open downloads_template_file: $downloads_template_file: $!\n";
  $download_template = <TEMPLATEFILE>;
 close(TEMPLATEFILE);
 
@@ -71,9 +74,9 @@ if ($fontvalues eq '')
 
 if ($foundfont eq 0)
 	{
-	print "Status: 302 Found\n";
-	print "Expires: 31 Dec 2020\n";
-	print "Location: http://www.grilledcheese.com/\n\n";
+	print "Status: 404 Not Found\n";
+	print "Expires: 31 Dec 2020\n\n";
+	print "fname: $fname not found\n\n";
 	}
 
 if (-e "$fontimgreal$fname.gif") {

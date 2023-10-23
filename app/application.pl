@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+use Apache2::RequestRec;
+use Apache2::RequestUtil;
 
 #############################################################
 # application.pl  Version 6.6.6
@@ -11,22 +13,19 @@
 # 			global.pl. heh
 #
 #############################################################
-$date_command = "/bin/date";
-$basedir = "/app/";
-$template_dir = "templates/";
+my $date_command = "/bin/date";
+our $basedir = "/app/";
+our $template_dir = "templates/";
 
-$date_command 	= "/bin/date";
-$time 			= `$date_command +"%H:%M:%S"`; chop($time);
-$day 			= `$date_command +"%m_%d_%y"`; chop($day);
+our $time 			= `$date_command +"%H:%M:%S"`; chop($time);
+our $day 			= `$date_command +"%m_%d_%y"`; chop($day);
+our $r = Apache2::RequestUtil->request;
 
+our $user_agent = $r->headers_in->{'User-Agent'};
 
-$_ = $ENV{'HTTP_USER_AGENT'};
-
-$user_agent = $ENV{'HTTP_USER_AGENT'};
-
-$browser_name = "";
-$browser_version = "";
-$browser_key = "";
+our $browser_name = "";
+our $browser_version = "";
+our $browser_key = "";
 
 # BROWSER CHECK
 if ($user_agent =~ /MSIE/) {
@@ -81,28 +80,32 @@ $page_template = "mozilla.html";
 	# this function unUrlEncodes form submit and query string variables and puts
 	# all variables into a hash called $FORM
 	sub unurl {
-		foreach $pair (@pairs)
-			{
-   			($myname, $myvalue) = split(/=/, $pair);
-   			$myvalue =~ tr/+/ /;
-   			$myvalue =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
-
-   			$FORM{$myname} = $myvalue;
-			}
+    	my @pairs = @_;
+    	my %FORM;
+		foreach my $pair (@pairs) {
+			my ($myname, $myvalue) = split(/=/, $pair);
+			$myvalue =~ tr/+/ /;
+			$myvalue =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+			$FORM{$myname} = $myvalue;
 		}
+    	return %FORM;
+	}
+		
+	my $args = $r->args();
+	my @query_pairs = split(/&/, $args);
+	my %query_form = unurl(@query_pairs);
 
-	# get the query string pairs
-	@pairs = split(/&/, $ENV{'QUERY_STRING'});
-	&unurl;
+	my $pi = $r->path_info();
+	$pi =~ s/^.//;
+	my @path_pairs = split(/\//, $pi);
+	my %path_form = unurl(@path_pairs);
 
-	$ENV{'PATH_INFO'} =~ s/^.//;
-	@pairs = split(/\//, $ENV{'PATH_INFO'});
-	&unurl;
+	my %FORM = (%query_form, %path_form);
 
 	# get the form submit pairs
-	read(STDIN, $formsubmit, $ENV{'CONTENT_LENGTH'});
-	@pairs = split(/&/, $formsubmit);
-	&unurl;
+	# read(STDIN, $formsubmit, $r->header_in->{'Content-length'});
+	# @pairs = split(/&/, $formsubmit);
+	# &unurl;
 
 # END READ INPUT VARIABLES #
 # END READ INPUT VARIABLES #
@@ -163,17 +166,18 @@ $page_template = "mozilla.html";
 
 
 sub dollarFormat {
-	local($numtoformat) = @_;
-	$numtoformat = sprintf("%.2f", $numtoformat);
+    my ($numtoformat) = @_;
+    $numtoformat = sprintf("%.2f", $numtoformat);
 
-	while ($numtoformat =~ /(\d)(\d{3})(\..+|\,.+)$/) {
-		$numtoformat =~ s/(\d)(\d{3})(\..+|\,.+)$/$1\,$2$3/g;
-	}
-	return $numtoformat;
+    while ($numtoformat =~ /(\d)(\d{3})(\..+|\,.+)$/) {
+        $numtoformat =~ s/(\d)(\d{3})(\..+|\,.+)$/$1\,$2$3/g;
+    }
+    
+    return $numtoformat;
 }
 
 sub trim {
-	local($stringtotrim) = @_;
+	my($stringtotrim) = @_;
 	# Cut off white space
 	$stringtotrim =~ s/^\s+//;
 	$stringtotrim =~ s/\s+$//;

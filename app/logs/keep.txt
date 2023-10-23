@@ -1,0 +1,1 @@
+keep this file and directory. *.log files are ignored

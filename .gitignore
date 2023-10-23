@@ -19,3 +19,4 @@ nytprof.out
 *.bs
 .DS_Store
 ignore
+/app/logs/*.log
