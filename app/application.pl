@@ -12,7 +12,7 @@
 #
 #############################################################
 $date_command = "/bin/date";
-$basedir = "/home/tea/grill/";
+$basedir = "/app/";
 $template_dir = "templates/";
 
 $date_command 	= "/bin/date";
@@ -53,21 +53,21 @@ if ($browser_key eq "mozilla" && $browser_version < 5) {
 }
 # END BROWSER CHECK
 
-$page_template = "gen2.html";
+$template_dir .= "4.0/";
+$page_template = "mozilla.html";
 
-if ($browser_version >= 4) {
-	if ($browser_key eq "netscape") {
-		$template_dir .= "4.0/";
-		$page_template = "netscape.html";
-	} elsif ($browser_key eq "ie") {
-		$template_dir .= "4.0/";
-		$page_template = "ie.html";
-	} elsif ($browser_key eq "mozilla") {
-		$template_dir .= "4.0/";
-		$page_template = "mozilla.html";
-	}
-}
-
+# if ($browser_version >= 4) {
+# 	if ($browser_key eq "netscape") {
+# 		$template_dir .= "4.0/";
+# 		$page_template = "netscape.html";
+# 	} elsif ($browser_key eq "ie") {
+# 		$template_dir .= "4.0/";
+# 		$page_template = "ie.html";
+# 	} elsif ($browser_key eq "mozilla") {
+# 		$template_dir .= "4.0/";
+# 		$page_template = "mozilla.html";
+# 	}
+# }
 
 # Log The User
 # open (LOGFILE,">>$logreal");

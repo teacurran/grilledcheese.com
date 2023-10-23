@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-require "../application.pl";
+require "/app/application.pl";
 
 $main_template_file = "${basedir}${template_dir}${page_template}";
 $fontpreal 		= "${basedir}img/font/preview/";

@@ -13,7 +13,7 @@ GrilledCheese.com: Updates
 
                         <B>10.16.99</B>
                         <BLOCKQUOTE>
-                        <A Href="http://grilledcheese.com/c/fonts.pl/fname=electro">ElectroCandy</A>, released today.<BR>
+                        <A Href="/c/fonts.pl/fname=electro">ElectroCandy</A>, released today.<BR>
                         Three different styles, 50-100 characters each.<BR>
                         As with all new fonts, please inform me if you have any problems.<BR>
                         </BLOCKQUOTE>

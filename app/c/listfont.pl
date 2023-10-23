@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 use DB_File;
 
-require "../application.pl";
+require "/app/application.pl";
 
 $fontsdbm = "${basedir}data/dbm/fonts";
 $main_template_file = "${basedir}${template_dir}${page_template}";
 $fontpreal = "${basedir}img/font/preview/";
 
-open (TEMPLATEFILE,"$main_template_file") || die "Can't Open $templatefile: $!\n";
+open (TEMPLATEFILE,"$main_template_file") || die "Can't open '$templatefile': $!\n";
  @T_LINES=<TEMPLATEFILE>;
 close(TEMPLATEFILE);
 $SIZE=@T_LINES;
@@ -66,7 +66,7 @@ tie(%FONTS, "DB_File", $fontsdbm, O_RDONLY, 0, $DB_File::DB_BTREE) || die "Can't
 			{
 			print '<B>&nbsp;&nbsp;&nbsp;</B>';
 			}
-		print "<A Href=\"http://grilledcheese.com/c/fonts.pl/fname=${val}/\">$name</A><BR>\n";
+		print "<A Href=\"/c/fonts.pl/fname=${val}/\">$name</A><BR>\n";
 
 		if ( $loopcount >= $halfsize && $loopcount < $halfsize + 1)
 			{
