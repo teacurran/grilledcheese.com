@@ -133,13 +133,12 @@ sub insertvalue {
 	$downinfo .= $strTemplate;
 }
 
-print "\n\n$fontreal$fontmacttf";
 if (-e "$fontreal$fontmacttf")
     {
 	$fontname = "${fname}ttf.sit.hqx";
 	$fontreaname = "${basedir}fonts/mac/$fontname";
 	$fontcountername = "${basedir}data/counters/fonts/$fname.mac.ttf";
-	$link = "http://www.grilledcheese.com/c/download.pl/font=$fname/platform=mac/type=ttf/get=$fname.html";
+	$link = "/c/download.pl/font=$fname/platform=mac/type=ttf/get=$fname.html";
 	$imagename = "apple_d.gif";
 	$fonttype = "TTF";
 	&insertvalue ($fontname, $fontreaname, $fontcountername, $link, $imagename, $fonttype, $download_template);
@@ -150,7 +149,7 @@ if (-e "$fontreal$fontmacttf")
 	$fontname = "${fname}ps.sit.hqx";
 	$fontreaname = "${basedir}fonts/mac/$fontname";
 	$fontcountername = "${basedir}data/counters/fonts/$fname.mac.ps";
-	$link = "http://www.grilledcheese.com/c/download.pl/font=$fname/platform=mac/type=ps/get=$fname.html";
+	$link = "/c/download.pl/font=$fname/platform=mac/type=ps/get=$fname.html";
 	$imagename = "apple_d.gif";
 	$fonttype = "PS";
 	&insertvalue ($fontname, $fontreaname, $fontcountername, $link, $imagename, $fonttype, $download_template);
@@ -161,7 +160,7 @@ if (-e "$fontreal$fontmacttf")
 	$fontname = "${fname}ttf.zip";
 	$fontreaname = "${basedir}fonts/pc/$fontname";
 	$fontcountername = "${basedir}data/counters/fonts/$fname.pc.ttf";
-	$link = "http://www.grilledcheese.com/c/download.pl/font=$fname/platform=pc/type=ttf/get=$fname.html";
+	$link = "/c/download.pl/font=$fname/platform=pc/type=ttf/get=$fname.html";
 	$imagename = "windows_d.gif";
 	$fonttype = "TTF";
 	&insertvalue ($fontname, $fontreaname, $fontcountername, $link, $imagename, $fonttype, $download_template);
@@ -172,7 +171,7 @@ if (-e "$fontreal$fontmacttf")
 	$fontname = "${fname}ps.zip";
 	$fontreaname = "${basedir}fonts/pc/$fontname";
 	$fontcountername = "${basedir}data/counters/fonts/$fname.pc.ps";
-	$link = "http://www.grilledcheese.com/c/download.pl/font=$fname/platform=pc/type=ps/get=$fname.html";
+	$link = "/c/download.pl/font=$fname/platform=pc/type=ps/get=$fname.html";
 	$imagename = "windows_d.gif";
 	$fonttype = "PS";
 	&insertvalue ($fontname, $fontreaname, $fontcountername, $link, $imagename, $fonttype, $download_template);

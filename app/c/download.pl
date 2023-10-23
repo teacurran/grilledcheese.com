@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -W
 
 $FORM{platform} = 'pc';
 $FORM{font} = 'none';
@@ -12,11 +12,15 @@ if ($FORM{platform} eq "mac")
 	$endtag = ".sit.hqx";
 }
 
-$fontreaname = "/home/tea/grill/fonts/$FORM{platform}/$FORM{font}$FORM{type}$endtag";
+$fontreaname = "/app/fonts/$FORM{platform}/$FORM{font}$FORM{type}$endtag";
 
 if (-e "$fontreaname")
 {
-	$counterfname = "/home/tea/grill/data/counters/fonts/$FORM{font}.$FORM{platform}.$FORM{type}";
+	$counterfname = "/app/data/counters/fonts/$FORM{font}.$FORM{platform}.$FORM{type}";
+
+	open(LOG, ">>",  "/home/api/grilledcheese.com/log.txt");
+		print LOG "$counterfname\n";
+	close LOG;
 
 	if (-e "$counterfname")
 		{
@@ -34,17 +38,17 @@ if (-e "$fontreaname")
 		print COUNT $Hits;
 	close(COUNT);
 
-$LastDFName = "/home/tea/grill/data/counters/lastfont.txt";
+$LastDFName = "/app/data/counters/lastfont.txt";
 open(LAST,">$LastDFName");
 print LAST $FORM{font};
 close(LAST);
 
 
 	print "Status: 302 Found\n";
-	print "Location: http://www.grilledcheese.com/fonts/$FORM{platform}/$FORM{font}$FORM{type}$endtag\n\n";
+	print "Location: /fonts/$FORM{platform}/$FORM{font}$FORM{type}$endtag\n\n";
 }
 else
 {
 	print "Status: 302 Found\n";
-	print "Location: http://www.grilledcheese.com/error/fontnotfound.html\n\n";
+	print "Location: /error/fontnotfound.html\n\n";
 }
