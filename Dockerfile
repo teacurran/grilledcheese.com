@@ -16,4 +16,7 @@ RUN echo "Include /usr/local/apache2/conf/apache-config.conf" >> /usr/local/apac
 WORKDIR /app
 COPY ./app /app
 
+RUN chmod +x /app/*.pl
+RUN chmod +x /app/c/*.pl
+
 EXPOSE 80

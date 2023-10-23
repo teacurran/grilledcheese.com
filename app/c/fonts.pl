@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use diagnostics;
 use DB_File;
-use Apache2::Log ();
 
 require "/app/application.pl";
 
@@ -34,23 +33,25 @@ while (my $line = <$fh>) {
 }
 close($fh);
 
-undef $/;
-
 my ($template, $content_template, $download_template);
 open ($fh, '<', $main_template_file) || die "Can't Open main_template_file: $main_template_file: $!\n";
- $template = <$fh>;
+{
+  local $/ = undef;
+  $template = <$fh>;
+}
 close($fh);
 open ($fh, '<', $content_template_file) || die "Can't Open content_template_file: $content_template_file: $!\n";
- $content_template = <$fh>;
+{
+  local $/ = undef;
+  $content_template = <$fh>;
+}
 close($fh);
 
-my $r = shift; # Assuming you're in a handler and have the request object.
-$r->log->info("BASEDIR: $basedir");
-$r->log->info("TEMPLATE_DIR: $template_dir");
-$r->log->info("DOWNLOADS TEMPLATE FILE: $downloads_template_file");
-
 open ($fh, '<', $downloads_template_file) || die "Can't Open downloads_template_file: $downloads_template_file: $!\n";
- $download_template = <$fh>;
+{
+  local $/ = undef;
+  $download_template = <$fh>;
+}
 close($fh);
 
 my ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
@@ -132,6 +133,7 @@ sub insertvalue {
 	$downinfo .= $strTemplate;
 }
 
+print "\n\n$fontreal$fontmacttf";
 if (-e "$fontreal$fontmacttf")
     {
 	$fontname = "${fname}ttf.sit.hqx";
