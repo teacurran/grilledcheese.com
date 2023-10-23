@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -W
 use DB_File;
 
 require "../application.pl";
@@ -6,16 +6,29 @@ require "../application.pl";
 $fontsdbm = "${basedir}data/dbm/fonts";
 $main_template_file = "${basedir}${template_dir}${page_template}";
 $fontpreal = "${basedir}img/font/preview/";
+$fontdata = "${basedir}data/font_data.txt";
 
 open (TEMPLATEFILE,"$main_template_file") || die "Can't Open $templatefile: $!\n";
- @T_LINES=<TEMPLATEFILE>;
+	@T_LINES=<TEMPLATEFILE>;
 close(TEMPLATEFILE);
 $SIZE=@T_LINES;
 
-for ($i=0;$i<=$SIZE;$i++)
-	{
+for ($i=0;$i<=$SIZE;$i++) {
 	$template = "$template$T_LINES[$i]";
+}
+
+
+open (FONT_DATA,"$fontdata") || die "Can't Open $fontdata: $!\n";
+	@LINES=<FONT_DATA>;
+close(FONT_DATA);
+$SIZE=@LINES;
+for ($i=0;$i<=$SIZE;$i++) {
+	@thisitem 	= split(/:\|:/, $LINES[$i]);
+	if ($thisitem[0] ne '') {
+		$FONTS{$thisitem[0]} = $LINES[$i];
 	}
+}	
+
 
 ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
 $header =~ s/<!--- %TITLE% --->/Grilledcheese.com: F O N T S/g;
@@ -23,8 +36,6 @@ $header =~ s/<!--- %TITLE% --->/Grilledcheese.com: F O N T S/g;
 $loopcount = 0;
 
 #dbmopen %FONTS, $fontsdbm, 0666;
-
-tie(%FONTS, "DB_File", $fontsdbm, O_RDONLY, 0, $DB_File::DB_BTREE) || die "Can't open $fontsdbm: $!\n";
 
 	@dbmkeys = keys %FONTS;
 	$dbmsize = @dbmkeys;
@@ -45,18 +56,18 @@ tie(%FONTS, "DB_File", $fontsdbm, O_RDONLY, 0, $DB_File::DB_BTREE) || die "Can't
 		{
 		$loopcount++;
 		@thisitem 	= split(/:\|:/, $FONTS{$val});
-		$name 		= $thisitem[0];
-		$height 	= $thisitem[1];
-		$width 		= $thisitem[2];
-		$orderflag 	= $thisitem[3];
-		$price 		= $thisitem[4];
-		$pcchars   	= $thisitem[5];
-		$macchars  	= $thisitem[6];
-		$created 	= $thisitem[7];
-		$modify 	= $thisitem[8];
-		$notes 		= $thisitem[9];
-		$teaser 	= $thisitem[10];
-		$new	 	= $thisitem[11];
+		$name 		= $thisitem[1];
+		$height 	= $thisitem[2];
+		$width 		= $thisitem[3];
+		$orderflag 	= $thisitem[4];
+		$price 		= $thisitem[5];
+		$pcchars   	= $thisitem[6];
+		$macchars  	= $thisitem[7];
+		$created 	= $thisitem[8];
+		$modify 	= $thisitem[9];
+		$notes 		= $thisitem[10];
+		$teaser 	= $thisitem[11];
+		$new	 	= $thisitem[12];
 
 		if ($price <= 0)
 			{
@@ -66,7 +77,7 @@ tie(%FONTS, "DB_File", $fontsdbm, O_RDONLY, 0, $DB_File::DB_BTREE) || die "Can't
 			{
 			print '<B>&nbsp;&nbsp;&nbsp;</B>';
 			}
-		print "<A Href=\"http://grilledcheese.com/c/fonts.pl/fname=${val}/\">$name</A><BR>\n";
+		print "<A Href=\"/c/fonts.pl/fname=${val}\">$name</A><BR>\n";
 
 		if ( $loopcount >= $halfsize && $loopcount < $halfsize + 1)
 			{
@@ -78,6 +89,5 @@ tie(%FONTS, "DB_File", $fontsdbm, O_RDONLY, 0, $DB_File::DB_BTREE) || die "Can't
 		print "	</TR>\n";
 		print "</TABLE>\n";
 		print "</CENTER>\n";
-untie(%FONTS);
 
 print "$footer\n";
