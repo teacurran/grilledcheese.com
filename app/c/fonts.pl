@@ -1,7 +1,7 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -W
 use DB_File;
 
-require "/app/application.pl";
+require "../application.pl";
 
 $fname = $FORM{'fname'};
 $foundfont = 1;
@@ -9,12 +9,23 @@ $foundfont = 1;
 $fonturl = "/fonts/";
 $fontreal = "${basedir}fonts/";
 $fontimgreal = "${basedir}img/font/";
-
 $fontsdbm = "${basedir}data/dbm/fonts";
+$fontdata = "${basedir}data/font_data.txt";
 
 $main_template_file = "${basedir}${template_dir}${page_template}";
 $content_template_file = "${basedir}${template_dir}fonts.html";
 $downloads_template_file = "${basedir}${template_dir}downloads.html";
+
+open (FONT_DATA,"$fontdata") || die "Can't Open $fontdata: $!\n";
+	@LINES=<FONT_DATA>;
+close(FONT_DATA);
+$SIZE=@LINES;
+for ($i=0;$i<=$SIZE;$i++) {
+	@thisitem 	= split(/:\|:/, $LINES[$i]);
+	if ($thisitem[0] ne '') {
+		$FONTS{$thisitem[0]} = $LINES[$i];
+	}
+}	
 
 undef $/;
 
@@ -31,24 +42,22 @@ close(TEMPLATEFILE);
 ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
 
 
-tie(%FONTS, "DB_File", $fontsdbm, O_RDONLY, 0, $DB_File::DB_BTREE) || die "Can't open $fontsdbm: $!\n";
-	$fontvalues = $FONTS{$fname};
-untie(%FONTS);
+$fontvalues = $FONTS{$fname};
 
 @thisitem = split(/:\|:/, $fontvalues);
-$printname = $thisitem[0];
-$fontheight = $thisitem[1];
-$fontwidth =  $thisitem[2];
-$orderflag =  $thisitem[3];
-$fontprice =  $thisitem[4];
-$pcchars   	= $thisitem[5];
-$macchars  	= $thisitem[6];
-$created 	= $thisitem[7];
-$modify 	= $thisitem[8];
-$notes 		= $thisitem[9];
-$teaser 	= $thisitem[10];
-$new 		= $thisitem[11];
-$makambo	= $thisitem[12];
+$printname = $thisitem[1];
+$fontheight = $thisitem[2];
+$fontwidth =  $thisitem[3];
+$orderflag =  $thisitem[4];
+$fontprice =  $thisitem[5];
+$pcchars   	= $thisitem[6];
+$macchars  	= $thisitem[7];
+$created 	= $thisitem[8];
+$modify 	= $thisitem[9];
+$notes 		= $thisitem[10];
+$teaser 	= $thisitem[11];
+$new 		= $thisitem[12];
+$makambo	= $thisitem[13];
 
 if ($fname eq '')
 	{
@@ -162,6 +171,11 @@ $content_template =~ s/<!--- %pcchars% --->/$pcchars/g;
 $content_template =~ s/<!--- %created% --->/$created/g;
 $content_template =~ s/<!--- %modify% --->/$modify/g;
 $content_template =~ s/<!--- %fname% --->/$fname/g;
+
+$content_template =~ s/%printname%/$printname/g;
+$content_template =~ s/%fontprice%/$fontprice/g;
+$content_template =~ s/%fname%/$fname/g;
+
 $content_template =~ s/%fname%/$fname/g;
 
 if (length($notes)) {
@@ -175,7 +189,7 @@ if (length($notes)) {
 #}
 
 if ($orderflag eq 1) {
-	$content_template =~ s/(<!--- MAILORDER)(.*?)(--->)/$2/gs;
+	$content_template =~ s/(<!--- PAYPAL)(.*?)(--->)/$2/gs;
 }
 
 if ( $insertcount gt 0 ) {
@@ -183,7 +197,11 @@ if ( $insertcount gt 0 ) {
 	$content_template =~ s/%downloads%/$downinfo/gs;
 }
 
+# Cleanup leftover comments
+$content_template =~ s/(<!---)(.*?)(--->)//gs;
+
 $header =~ s/<!--- %TITLE% --->/Grilledcheese.com : $printname/g;
+
 
 print "Content-type: text/html\n\n";
 print $header;
