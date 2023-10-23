@@ -1,7 +1,4 @@
 #!/usr/bin/perl
-use Apache2::RequestRec;
-use Apache2::RequestUtil;
-
 #############################################################
 # application.pl  Version 6.6.6
 # Copyright 1998-99 TeA Curran
@@ -17,15 +14,29 @@ my $date_command = "/bin/date";
 our $basedir = "/app/";
 our $template_dir = "templates/";
 
-our $time 			= `$date_command +"%H:%M:%S"`; chop($time);
-our $day 			= `$date_command +"%m_%d_%y"`; chop($day);
-our $r = Apache2::RequestUtil->request;
-
-our $user_agent = $r->headers_in->{'User-Agent'};
+our $time = `$date_command +"%H:%M:%S"`; chop($time);
+our $day = `$date_command +"%m_%d_%y"`; chop($day);
+my $is_mod_perl = $ENV{MOD_PERL} ? 1 : 0;
 
 our $browser_name = "";
 our $browser_version = "";
 our $browser_key = "";
+
+my($args, $pi, $user_agent);
+
+if ($is_mod_perl) {
+    use Apache2::RequestRec;
+    use Apache2::RequestUtil;
+
+    my $r = Apache2::RequestUtil->request;
+    $user_agent = $r->headers_in->{'User-Agent'};
+    $args = $r->args() || "";
+    $pi = $r->path_info();
+} else {
+    $user_agent = $ENV{'HTTP_USER_AGENT'};
+    $args = $ENV{'QUERY_STRING'} || "";
+    $pi = $ENV{'PATH_INFO'};
+}
 
 # BROWSER CHECK
 if ($user_agent =~ /MSIE/) {
@@ -55,115 +66,39 @@ if ($browser_key eq "mozilla" && $browser_version < 5) {
 $template_dir .= "4.0/";
 $page_template = "mozilla.html";
 
-# if ($browser_version >= 4) {
-# 	if ($browser_key eq "netscape") {
-# 		$template_dir .= "4.0/";
-# 		$page_template = "netscape.html";
-# 	} elsif ($browser_key eq "ie") {
-# 		$template_dir .= "4.0/";
-# 		$page_template = "ie.html";
-# 	} elsif ($browser_key eq "mozilla") {
-# 		$template_dir .= "4.0/";
-# 		$page_template = "mozilla.html";
-# 	}
-# }
-
-# Log The User
-# open (LOGFILE,">>$logreal");
-# print LOGFILE "$time, $ENV{'REMOTE_ADDR'}, $ENV{'SCRIPT_NAME'}$ENV{'DOCUMENT_URI'}$ENV{'PATH_INFO'}, $ENV{'HTTP_REFERER'},	$ENV{'HTTP_USER_AGENT'}, $browser, $bversion\n";
-# close(LOGFILE);
-
-
 # READ INPUT VARIABLES #
 # READ INPUT VARIABLES #
 
-	# this function unUrlEncodes form submit and query string variables and puts
-	# all variables into a hash called $FORM
-	sub unurl {
-    	my @pairs = @_;
-    	my %FORM;
-		foreach my $pair (@pairs) {
-			my ($myname, $myvalue) = split(/=/, $pair);
-			$myvalue =~ tr/+/ /;
-			$myvalue =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
-			$FORM{$myname} = $myvalue;
-		}
-    	return %FORM;
-	}
-		
-	my $args = $r->args() || "";
-	my @query_pairs = split(/&/, $args);
-	my %query_form = unurl(@query_pairs);
+# this function unUrlEncodes form submit and query string variables and puts
+# all variables into a hash called $FORM
+sub splitParams {
+    my @pairs = @_;
+    my %FORM;
+    foreach my $pair (@pairs) {
+        my ($name, $value) = split(/=/, $pair);
+        $value =~ tr/+/ /;
+        $value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+        $FORM{$name} = $value;
+    }
+    return %FORM;
+}
 
-	my $pi = $r->path_info();
-	$pi =~ s/^.//;
-	my @path_pairs = split(/\//, $pi);
-	my %path_form = unurl(@path_pairs);
+my @query_pairs = split(/&/, $args);
+my %query_form = splitParams(@query_pairs);
 
-	our %FORM = (%query_form, %path_form);
+$pi =~ s/^.//;
+my @path_pairs = split(/\//, $pi);
+my %path_form = splitParams(@path_pairs);
 
-	# get the form submit pairs
-	# read(STDIN, $formsubmit, $r->header_in->{'Content-length'});
-	# @pairs = split(/&/, $formsubmit);
-	# &unurl;
+our %FORM = (%query_form, %path_form);
+
+# get the form submit pairs
+# read(STDIN, $formsubmit, $r->header_in->{'Content-length'});
+# @pairs = split(/&/, $formsubmit);
+# &unurl;
 
 # END READ INPUT VARIABLES #
 # END READ INPUT VARIABLES #
-
-
-############################################################################
-#sub count_hits		#4/28/99 0:32AM
-############################################################################
-#	{
-#	$filevalue = $ENV{'DOCUMENT_URI'};
-#	$filevalue =~ s/\///g;
-#	$filevalue =~ s/\.//g;
-#	$hits_val = "";
-#
-#	$dbmfile = "/opt/guide/grill/HTML/counters/counter";
-#
-#	dbmopen %COUNTERS, $dbmfile, 0666;
-#		$COUNTERS{$filevalue} = $COUNTERS{$filevalue} + 1;
-#		$Hits = $COUNTERS{$filevalue};
-#	dbmclose %COUNTERS;
-#
-#	$Ones = $Hits % 10;
-#	$Hits = ($Hits - $Ones) / 10;
-#	$Tens = $Hits % 10;
-#	$Hits = ($Hits - $Tens) / 10;
-#	$Hundreds = $Hits % 10;
-#	$Hits = ($Hits - $Hundreds) / 10;
-#	$Thousands = $Hits % 10;
-#	$Hits = ($Hits - $Thousands) / 10;
-#	$Ten_Thousands = $Hits % 10;
-#	$Hits = ($Hits - $Ten_Thousands) / 10;
-#	$Hun_Thousands = $Hits % 10;
-#	$Hits = ($Hits - $Hun_Thousands) / 10;
-#
-#	@R_Ones = ("I","II","III","IV","V","VI","VII","VIII","IX");
-#	@R_Tens = ("X","XX","XXX","XL","L","LX","LXX","LXXX","XC");
-#	@R_Hundreds = ("C","CC","CCC","CD","D","DC","DCC","DCCC","CM");
-#	@R_Thousands = ("M","MM","MMM","MW","W","WM","WMM","WMMM","WQ");
-#	@R_Ten_Thousands = ("Q","QQ","QQQ","QH","H","HQ","HQQ","HQQQ","HR");
-#	@R_Hun_Thousands = ("R","RR","RRR","RT","T","RT","RTT","RTTT","O");
-#
-#	for ($i=0; $i < $Hits; $i++)
-#		{$hits_val = "${hits_val}O";}
-#	if ($Hun_Thousands)
-#		{$hits_val = "${hits_val}@R_Hun_Thousands[$Hun_Thousands]";}
-#	if ($Ten_Thousands)
-#		{$hits_val = "${hits_val}@R_Ten_Thousands[$Ten_Thousands]";}
-#	if ($Thousands)
-#		{$hits_val = "${hits_val}@R_Thousands[$Thousands]";}
-#	if ($Hundreds)
-#		{$hits_val = "${hits_val}@R_Hundreds[$Hundreds-1]";}
-#	if ($Tens)
-#		{$hits_val = "${hits_val}@R_Tens[$Tens-1]";}
-#	if ($Ones)
-#		{$hits_val = "${hits_val}@R_Ones[$Ones-1]";}
-#
-#	}
-
 
 sub dollarFormat {
     my ($value) = @_;
@@ -172,7 +107,6 @@ sub dollarFormat {
     while ($value =~ /(\d)(\d{3})(\..+|\,.+)$/) {
         $value =~ s/(\d)(\d{3})(\..+|\,.+)$/$1\,$2$3/g;
     }
-    
     return $value;
 }
 
@@ -199,7 +133,5 @@ sub isNumeric {
 		return 0;
 	}
 }
-
-
 
 1;

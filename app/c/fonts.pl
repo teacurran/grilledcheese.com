@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use diagnostics;
 use DB_File;
+use Apache2::Log ();
 
 require "/app/application.pl";
 
@@ -16,13 +17,14 @@ my $fontreal = "${basedir}fonts/";
 my $fontimgreal = "${basedir}img/font/";
 my $fontsdbm = "${basedir}data/dbm/fonts";
 my $fontdata = "${basedir}data/font_data.txt";
+my $fh;
 
 my $main_template_file = "/${basedir}${template_dir}${page_template}";
 my $content_template_file = "${basedir}${template_dir}fonts.html";
 my $downloads_template_file = "${basedir}${template_dir}downloads.html";
 
 my %FONTS;
-open (my $fh, '<', $fontdata) or die "Can't Open $fontdata: $!";
+open ($fh, '<', $fontdata) or die "Can't Open $fontdata: $!";
 while (my $line = <$fh>) {
     chomp $line;
     my @thisLine = split(/:\|:/, $line);
@@ -35,15 +37,21 @@ close($fh);
 undef $/;
 
 my ($template, $content_template, $download_template);
-open (TEMPLATEFILE,"$main_template_file") || die "Can't Open main_template_file: $main_template_file: $!\n";
- $template = <TEMPLATEFILE>;
-close(TEMPLATEFILE);
-open (TEMPLATEFILE,"$content_template_file") || die "Can't Open content_template_file: $content_template_file: $!\n";
- $content_template = <TEMPLATEFILE>;
-close(TEMPLATEFILE);
-open (TEMPLATEFILE,"$downloads_template_file") || die "Can't Open downloads_template_file: $downloads_template_file: $!\n";
- $download_template = <TEMPLATEFILE>;
-close(TEMPLATEFILE);
+open ($fh, '<', $main_template_file) || die "Can't Open main_template_file: $main_template_file: $!\n";
+ $template = <$fh>;
+close($fh);
+open ($fh, '<', $content_template_file) || die "Can't Open content_template_file: $content_template_file: $!\n";
+ $content_template = <$fh>;
+close($fh);
+
+my $r = shift; # Assuming you're in a handler and have the request object.
+$r->log->info("BASEDIR: $basedir");
+$r->log->info("TEMPLATE_DIR: $template_dir");
+$r->log->info("DOWNLOADS TEMPLATE FILE: $downloads_template_file");
+
+open ($fh, '<', $downloads_template_file) || die "Can't Open downloads_template_file: $downloads_template_file: $!\n";
+ $download_template = <$fh>;
+close($fh);
 
 my ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
 
