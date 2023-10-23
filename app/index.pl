@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
-require ("application.pl");
+require ("/app/application.pl");
 
-$pageslocation = "/home/appi/grilledcheese.com/static/updates.txt";
+$pageslocation = "/app/static/updates.txt";
 $main_template_file = "${basedir}${template_dir}${page_template}";
 
 

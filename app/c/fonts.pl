@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use DB_File;
 
-require "../application.pl";
+require "/app/application.pl";
 
 $fname = $FORM{'fname'};
 $foundfont = 1;

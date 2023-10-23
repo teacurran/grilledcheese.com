@@ -1,15 +1,15 @@
 #!/usr/bin/perl -W
 use DB_File;
 
-require "../application.pl";
+require "/app/application.pl";
 
 $fontsdbm = "${basedir}data/dbm/fonts";
 $main_template_file = "${basedir}${template_dir}${page_template}";
 $fontpreal = "${basedir}img/font/preview/";
 $fontdata = "${basedir}data/font_data.txt";
 
-open (TEMPLATEFILE,"$main_template_file") || die "Can't Open $templatefile: $!\n";
-	@T_LINES=<TEMPLATEFILE>;
+open (TEMPLATEFILE,"$main_template_file") || die "Can't open '$templatefile': $!\n";
+ @T_LINES=<TEMPLATEFILE>;
 close(TEMPLATEFILE);
 $SIZE=@T_LINES;
 

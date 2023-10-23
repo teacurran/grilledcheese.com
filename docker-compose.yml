@@ -9,3 +9,4 @@ services:
       - "8080:80"
     volumes:
       - ./app:/app
+      - ./apache-config.conf:/usr/local/apache2/conf/apache-config.conf
