@@ -6,32 +6,36 @@ use DB_File;
 
 require "/app/application.pl";
 
-$fname = $FORM{'fname'};
-$foundfont = 1;
+our (%FORM, $basedir, $template_dir, $page_template);
 
-$fonturl = "/fonts/";
-$fontreal = "${basedir}fonts/";
-$fontimgreal = "${basedir}img/font/";
-$fontsdbm = "${basedir}data/dbm/fonts";
-$fontdata = "${basedir}data/font_data.txt";
+my $fname = $FORM{'fname'};
+my $foundfont = 1;
 
-$main_template_file = "/${basedir}${template_dir}${page_template}";
-$content_template_file = "${basedir}${template_dir}fonts.html";
-$downloads_template_file = "${basedir}${template_dir}downloads.html";
+my $fonturl = "/fonts/";
+my $fontreal = "${basedir}fonts/";
+my $fontimgreal = "${basedir}img/font/";
+my $fontsdbm = "${basedir}data/dbm/fonts";
+my $fontdata = "${basedir}data/font_data.txt";
 
+my $main_template_file = "/${basedir}${template_dir}${page_template}";
+my $content_template_file = "${basedir}${template_dir}fonts.html";
+my $downloads_template_file = "${basedir}${template_dir}downloads.html";
+
+my %FONTS;
 open (FONT_DATA,"$fontdata") || die "Can't Open $fontdata: $!\n";
-	@LINES=<FONT_DATA>;
+	my @LINES=<FONT_DATA>;
 close(FONT_DATA);
-$SIZE=@LINES;
-for ($i=0;$i<=$SIZE;$i++) {
-	@thisitem 	= split(/:\|:/, $LINES[$i]);
-	if ($thisitem[0] ne '') {
-		$FONTS{$thisitem[0]} = $LINES[$i];
+my $SIZE=@LINES;
+for (my $i=0;$i<=$SIZE;$i++) {
+	my @thisLine 	= split(/:\|:/, $LINES[$i]);
+	if (@thisLine[0] ne '') {
+		$FONTS{@thisLine[0]} = $LINES[$i];
 	}
-}	
+}
 
 undef $/;
 
+my ($template, $content_template, $download_template);
 open (TEMPLATEFILE,"$main_template_file") || die "Can't Open main_template_file: $main_template_file: $!\n";
  $template = <TEMPLATEFILE>;
 close(TEMPLATEFILE);
@@ -42,32 +46,31 @@ open (TEMPLATEFILE,"$downloads_template_file") || die "Can't Open downloads_temp
  $download_template = <TEMPLATEFILE>;
 close(TEMPLATEFILE);
 
-($header, $footer) = split(/<!--- %MAIN% --->/, $template);
+my ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
 
+my $fontValues = $FONTS{$fname};
 
-$fontvalues = $FONTS{$fname};
-
-@thisitem = split(/:\|:/, $fontvalues);
-$printname = $thisitem[1];
-$fontheight = $thisitem[2];
-$fontwidth =  $thisitem[3];
-$orderflag =  $thisitem[4];
-$fontprice =  $thisitem[5];
-$pcchars   	= $thisitem[6];
-$macchars  	= $thisitem[7];
-$created 	= $thisitem[8];
-$modify 	= $thisitem[9];
-$notes 		= $thisitem[10];
-$teaser 	= $thisitem[11];
-$new 		= $thisitem[12];
-$makambo	= $thisitem[13];
+my @thisItem = split(/:\|:/, $fontValues);
+my $printname = $thisItem[1];
+my $fontheight = $thisItem[2];
+my $fontwidth =  $thisItem[3];
+my $orderflag =  $thisItem[4];
+my $fontprice =  $thisItem[5];
+my $pcchars   	= $thisItem[6];
+my $macchars  	= $thisItem[7];
+my $created 	= $thisItem[8];
+my $modify 	= $thisItem[9];
+my $notes 		= $thisItem[10];
+my $teaser 	= $thisItem[11];
+my $new 		= $thisItem[12];
+my $makambo	= $thisItem[13];
 
 if ($fname eq '')
 	{
  	$foundfont = 0;
  	}
 
-if ($fontvalues eq '')
+if ($fontValues eq '')
 	{
  	$foundfont = 0;
  	}
@@ -79,22 +82,24 @@ if ($foundfont eq 0)
 	print "fname: $fname not found\n\n";
 	}
 
+my $fimgname;
 if (-e "$fontimgreal$fname.gif") {
   	$fimgname = "${fname}.gif";
 } else {
   	$fimgname = 'previewmissing.gif';
 }
 
-$downinfo = "";
-$fontmacttf = "mac/". $fname ."ttf\.sit\.hqx";
-$fontmacps = "mac/". $fname ."ps\.sit\.hqx";
-$fontpcttf = "pc/". $fname ."ttf\.zip";
-$fontpcps = "pc/". $fname ."ps\.zip";
+my $downinfo = "";
+my $fontmacttf = "mac/". $fname ."ttf\.sit\.hqx";
+my $fontmacps = "mac/". $fname ."ps\.sit\.hqx";
+my $fontpcttf = "pc/". $fname ."ttf\.zip";
+my $fontpcps = "pc/". $fname ."ps\.zip";
+my ($fontreaname, $fontname, $fontcountername, $link, $imagename, $fonttype);
 
-$insertcount = 0;
+my $insertcount = 0;
 sub insertvalue {
 	my ($strName, $strRealName, $strCounterName, $strLink, $strImage, $strType, $strTemplate) = @_;
-	my $filesizekb, $filesize, $HitsThisFile;
+	my ($filesizekb, $filesize, $HitsThisFile);
 	$insertcount++;
 
 	open(FILEHITS,"$strCounterName");

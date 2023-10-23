@@ -100,7 +100,7 @@ $page_template = "mozilla.html";
 	my @path_pairs = split(/\//, $pi);
 	my %path_form = unurl(@path_pairs);
 
-	my %FORM = (%query_form, %path_form);
+	our %FORM = (%query_form, %path_form);
 
 	# get the form submit pairs
 	# read(STDIN, $formsubmit, $r->header_in->{'Content-length'});
@@ -166,34 +166,34 @@ $page_template = "mozilla.html";
 
 
 sub dollarFormat {
-    my ($numtoformat) = @_;
-    $numtoformat = sprintf("%.2f", $numtoformat);
+    my ($value) = @_;
+    $value = sprintf("%.2f", $value);
 
-    while ($numtoformat =~ /(\d)(\d{3})(\..+|\,.+)$/) {
-        $numtoformat =~ s/(\d)(\d{3})(\..+|\,.+)$/$1\,$2$3/g;
+    while ($value =~ /(\d)(\d{3})(\..+|\,.+)$/) {
+        $value =~ s/(\d)(\d{3})(\..+|\,.+)$/$1\,$2$3/g;
     }
     
-    return $numtoformat;
+    return $value;
 }
 
 sub trim {
-	my($stringtotrim) = @_;
+	my($value) = @_;
 	# Cut off white space
-	$stringtotrim =~ s/^\s+//;
-	$stringtotrim =~ s/\s+$//;
+	$value =~ s/^\s+//;
+	$value =~ s/\s+$//;
 
 	# Cut off line returns
-	$stringtotrim =~ s/^\n+//;
-	$stringtotrim =~ s/\n+$//;
+	$value =~ s/^\n+//;
+	$value =~ s/\n+$//;
 
-	return $stringtotrim;
+	return $value;
 }
 
 sub isNumeric {
-	local($stringtocheck) = @_;
-	if ($stringtocheck eq "") {
+	my($value) = @_;
+	if ($value eq "") {
 		return 0;
-	} elsif ($stringtocheck =~ /^\d*\.\d+$|^\d+\.\d*$|^\d+$/) {
+	} elsif ($value =~ /^\d*\.\d+$|^\d+\.\d*$|^\d+$/) {
 		return 1;
 	} else {
 		return 0;
