@@ -22,16 +22,15 @@ my $content_template_file = "${basedir}${template_dir}fonts.html";
 my $downloads_template_file = "${basedir}${template_dir}downloads.html";
 
 my %FONTS;
-open (FONT_DATA,"$fontdata") || die "Can't Open $fontdata: $!\n";
-	my @LINES=<FONT_DATA>;
-close(FONT_DATA);
-my $SIZE=@LINES;
-for (my $i=0;$i<=$SIZE;$i++) {
-	my @thisLine 	= split(/:\|:/, $LINES[$i]);
-	if (@thisLine[0] ne '') {
-		$FONTS{@thisLine[0]} = $LINES[$i];
-	}
+open (my $fh, '<', $fontdata) or die "Can't Open $fontdata: $!";
+while (my $line = <$fh>) {
+    chomp $line;
+    my @thisLine = split(/:\|:/, $line);
+    if ($thisLine[0] and $thisLine[0] ne '') {
+        $FONTS{$thisLine[0]} = $line;
+    }
 }
+close($fh);
 
 undef $/;
 
@@ -89,14 +88,14 @@ if (-e "$fontimgreal$fname.gif") {
   	$fimgname = 'previewmissing.gif';
 }
 
-my $downinfo = "";
+our $downinfo = "";
 my $fontmacttf = "mac/". $fname ."ttf\.sit\.hqx";
 my $fontmacps = "mac/". $fname ."ps\.sit\.hqx";
 my $fontpcttf = "pc/". $fname ."ttf\.zip";
 my $fontpcps = "pc/". $fname ."ps\.zip";
-my ($fontreaname, $fontname, $fontcountername, $link, $imagename, $fonttype);
+our ($fontreaname, $fontname, $fontcountername, $link, $imagename, $fonttype);
 
-my $insertcount = 0;
+our $insertcount = 0;
 sub insertvalue {
 	my ($strName, $strRealName, $strCounterName, $strLink, $strImage, $strType, $strTemplate) = @_;
 	my ($filesizekb, $filesize, $HitsThisFile);

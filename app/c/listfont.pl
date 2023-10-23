@@ -1,46 +1,42 @@
 #!/usr/bin/perl -W
-package Common;
 use DB_File;
 
 require "/app/application.pl";
 
-$fontsdbm = "${basedir}data/dbm/fonts";
-$main_template_file = "${basedir}${template_dir}${page_template}";
-$fontpreal = "${basedir}img/font/preview/";
-$fontdata = "${basedir}data/font_data.txt";
+our (%FORM, $basedir, $template_dir, $page_template);
 
-open (TEMPLATEFILE,"$main_template_file") || die "Can't open main_template_file: '$main_template_file': $!\n";
- @T_LINES=<TEMPLATEFILE>;
-close(TEMPLATEFILE);
-$SIZE=@T_LINES;
+my $fontsdbm = "${basedir}data/dbm/fonts";
+my $main_template_file = "${basedir}${template_dir}${page_template}";
+my $fontpreal = "${basedir}img/font/preview/";
+my $fontdata = "${basedir}data/font_data.txt";
 
-for ($i=0;$i<=$SIZE;$i++) {
-	$template = "$template$T_LINES[$i]";
+open (my $fh, '<', $main_template_file) || die "Can't open main_template_file: '$main_template_file': $!";
+while (my $line = <$fh>) {
+	$template = "$template$line";
 }
+close($fh);
 
+my %FONTS;
+open (my $fh, '<', $fontdata) || die "Can't open fontdata: '$fontdata': $!";
+while (my $line = <$fh>) {
+    chomp $line;
+    my @thisLine = split(/:\|:/, $line);
+    if ($thisLine[0] and $thisLine[0] ne '') {
+        $FONTS{$thisLine[0]} = $line;
+    }
+}
+close($fh);
 
-open (FONT_DATA,"$fontdata") || die "Can't Open $fontdata: $!\n";
-	@LINES=<FONT_DATA>;
-close(FONT_DATA);
-$SIZE=@LINES;
-for ($i=0;$i<=$SIZE;$i++) {
-	@thisitem 	= split(/:\|:/, $LINES[$i]);
-	if ($thisitem[0] ne '') {
-		$FONTS{$thisitem[0]} = $LINES[$i];
-	}
-}	
-
-
-($header, $footer) = split(/<!--- %MAIN% --->/, $template);
+my ($header, $footer) = split(/<!--- %MAIN% --->/, $template);
 $header =~ s/<!--- %TITLE% --->/Grilledcheese.com: F O N T S/g;
 
-$loopcount = 0;
+my $loopcount = 0;
 
 #dbmopen %FONTS, $fontsdbm, 0666;
 
-	@dbmkeys = keys %FONTS;
-	$dbmsize = @dbmkeys;
-	$halfsize = $dbmsize / 2;
+	my @dbmkeys = keys %FONTS;
+	my $dbmsize = @dbmkeys;
+	my $halfsize = $dbmsize / 2;
 
 	print "Content-type: text/html\n\n";
 	print "$header\n";

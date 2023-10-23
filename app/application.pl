@@ -91,7 +91,7 @@ $page_template = "mozilla.html";
     	return %FORM;
 	}
 		
-	my $args = $r->args();
+	my $args = $r->args() || "";
 	my @query_pairs = split(/&/, $args);
 	my %query_form = unurl(@query_pairs);
 
