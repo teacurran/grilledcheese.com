@@ -17,3 +17,20 @@ services:
     command: hugo server --bind=0.0.0.0
     volumes:
       - ./site:/src
+  build:
+    profiles:
+      - deploy
+    image: hugomods/hugo
+    ports:
+      - "1313:1313"
+    command: hugo --gc --minify
+    volumes:
+      - ./site:/src
+  view-static:
+    profiles:
+      - dev
+    image: httpd:latest
+    ports:
+      - '8081:80'
+    volumes:
+      - ./site/public:/usr/local/apache2/htdocs
