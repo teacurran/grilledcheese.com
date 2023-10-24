@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
-require "../application.pl";
+require "/app/application.pl";
 
-$basedir = "/home/tea/grill/";
+$basedir = "/app/";
 $main_template_file = "${basedir}${template_dir}${page_template}";
 
 undef $/;
@@ -16,15 +16,15 @@ $/ = "\n";
 
 $header =~ s/<!--- %TITLE% --->/Grilledcheese.com : Guestbook/g;
 
-$guestbookurl = "http://www.grilledcheese.com/c/static.pl/page=book";
+$guestbookurl = "/c/static.pl/page=book";
 $guestbookreal = "${basedir}static/book.txt";
 $guestlog = "${basedir}booklog.html";
-$cgiurl = "http://www.grilledcheese.com/c/guestbook.pl";
+$cgiurl = "/c/guestbook.pl";
 $date_command = "/bin/date";
 
 # Set Your Options:
 $mail = 0;              # 1 = Yes; 0 = No
-$linkmail = 1;          # 1 = Yes; 0 = No
+$linkmail = 0;          # 1 = Yes; 0 = No
 $separator = 1;         # 1 = <hr>; 0 = <p>
 $redirection = 1;       # 1 = Yes; 0 = No
 $entry_order = 1;       # 1 = Newest entries added first;
@@ -36,7 +36,7 @@ $line_breaks = 1;	# 1 = Yes; 0 = No
 # If you answered 1 to $mail or $remote_mail you will need to fill out
 # these variables below:
 $mailprog = '/usr/sbin/sendmail';
-$recipient = 'tea@tacoland.com';
+$recipient = 'tea@grilledcheese.com';
 
 # Done
 ##############################################################################
