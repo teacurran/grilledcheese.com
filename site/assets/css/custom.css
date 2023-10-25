@@ -1,0 +1,13 @@
+.fill-and-crop img {
+    width: 100vw;   /* Set width to 100% of the viewport width */
+    height: 100vh;  /* Set height to 100% of the viewport height */
+    object-fit: cover;  /* Cover the content box, cropping the image if necessary */
+    object-position: center;  /* Center the image within its container */
+    display: block;  /* Remove any default margins or spacing */
+    margin: 0;  /* Remove default margins */
+}
+
+/* Optional: Hide overflow of body to prevent scrolling */
+body {
+    /* overflow: hidden; */
+}
