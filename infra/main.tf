@@ -75,6 +75,30 @@ resource "aws_route53_record" "www-a" {
   allow_overwrite = true
 }
 
+resource "aws_route53_record" "root-aaaa" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = local.domain_name
+  type    = "AAAA"
+  alias {
+    name                   = aws_cloudfront_distribution.root_s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.root_s3_distribution.hosted_zone_id
+    evaluate_target_health = false
+  }
+  allow_overwrite = true
+}
+
+resource "aws_route53_record" "www-aaaa" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "www.${local.domain_name}"
+  type    = "AAAA"
+  alias {
+    name                   = aws_cloudfront_distribution.root_s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.root_s3_distribution.hosted_zone_id
+    evaluate_target_health = false
+  }
+  allow_overwrite = true
+}
+
 resource "aws_route53_record" "cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.ssl_certificate.domain_validation_options : dvo.domain_name => {
