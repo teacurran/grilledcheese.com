@@ -51,7 +51,12 @@ if grep -oE '(href|src)="[^"]*"' "$html" | grep -E 'grilledcheese\.com/[^"]|[a-z
 fi
 
 # 5. First-view weight.
-size() { stat -f %z "$1" 2>/dev/null || stat -c %s "$1"; }
+# `wc -c`, not `stat`: the two stats disagree on what -f means and the usual
+# `stat -f %z || stat -c %s` fallback is broken rather than portable — on Linux
+# the first form SUCCEEDS as "filesystem status" and prints block-device fields,
+# so the fallback never runs and the caller compares an integer against
+# "Namelen: 255". This ran green on macOS and failed on CI for exactly that.
+size() { wc -c < "$1" | tr -d ' '; }
 hero=0
 for f in "$site"/img/screens/feed-text-{light,dark}-720.{avif,webp}; do
   s=$(size "$f"); [ "$s" -gt "$hero" ] && hero=$s
