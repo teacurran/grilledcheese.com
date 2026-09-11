@@ -168,7 +168,7 @@ footer p{max-width:none}
         <source media="(prefers-color-scheme: dark)" type="image/avif" srcset="/img/screens/feed-text-dark-360.avif 360w, /img/screens/feed-text-dark-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
         <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="/img/screens/feed-text-dark-360.webp 360w, /img/screens/feed-text-dark-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px">
         <source type="image/avif" srcset="/img/screens/feed-text-light-360.avif 360w, /img/screens/feed-text-light-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
-        <img src="/img/screens/feed-text-light-360.webp" srcset="/img/screens/feed-text-light-360.webp 360w, /img/screens/feed-text-light-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px" width="1070" height="2167" fetchpriority="high" alt="The Home feed in the Text view: posts from The Associated Press, The New York Times and people on other networks, each with reply, repost, like and share actions, and the compose button in the bottom bar.">
+        <img src="/img/screens/feed-text-light-360.webp" srcset="/img/screens/feed-text-light-360.webp 360w, /img/screens/feed-text-light-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px" width="1070" height="2167" fetchpriority="high" alt="The Home feed in the Text view, following accounts on Bluesky such as The Associated Press and The New York Times, each post with reply, repost, like and share actions, and the compose button in the bottom bar.">
       </picture>
     </div>
   </figure>
@@ -239,6 +239,9 @@ footer p{max-width:none}
   <p>The split is what lets one identity be private while another is public, and what makes a change to your password protect all of them at once.</p>
   <h3>Pick the domain, not just the name</h3>
   <p>A new identity asks for two things: a username, and the domain it lives on. Grilled Cheese serves several domains, and the handle is the two together.</p>
+  <h3>Or bring your own domain</h3>
+  <p>If you own a domain, you can use it as your handle, so <code>@you.example.com</code> replaces <code>@you.grilledcheese.app</code>. That is how handles work on the wider ATProto network: the domain <em>is</em> the name, and all Grilled Cheese does is check that the domain agrees with you about who it belongs to. Because the domain is yours, the handle is yours too. Your name does not depend on us continuing to exist, and it comes with you if you ever move your identity to another provider, which a <code>grilledcheese.app</code> handle cannot.</p>
+  <p>The cost is one DNS record. <em>Settings → Handle</em> shows the two records you can publish to prove the domain is yours, either of which is enough, and they have to be published before you submit, because the server checks the moment you do. Your fediverse address does not change: to Mastodon you stay <code>@you@grilledcheese.app</code>, whatever your ATProto handle is.</p>
   <h3>Organizations on their own domain</h3>
   <p>An organization can point a domain it owns at Grilled Cheese. Once the domain is validated, the organization can grant identities on it, <code>you@yourcompany.com</code>, to member accounts. Those work exactly like any other identity: the member switches to it, posts from it, and keeps it separate from their personal presences.</p>
 </section>
