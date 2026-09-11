@@ -1,27 +1,35 @@
-name: Build and Deploy
+name: Check and Deploy
 
 on:
   push:
     branches: [ main ]
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate HTML
+        run: npx --yes html-validate@9 site/index.html
+
+      - name: Check references, origins, alt text and page weight
+        run: bin/check.sh
+
+  deploy:
+    needs: check
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment: production
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Build Site
-        run: hugo --minify
-        working-directory: ./site
 
       - name: Setup WireGuard
         run: |
@@ -52,12 +60,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          echo "Host 10.50.0.30" >> ~/.ssh/config
-          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
-          echo "  UserKnownHostsFile /dev/null" >> ~/.ssh/config
+          printf 'Host 10.50.0.30\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n' >> ~/.ssh/config
 
       - name: Deploy to Apache VM
-        run: rsync -avz --delete ./site/public/ deploy@10.50.0.30:/var/www/sites/grilledcheese.com/
+        run: rsync -avz --delete --exclude .DS_Store ./site/ deploy@10.50.0.30:/var/www/sites/grilledcheese.com/
 
       - name: Disconnect WireGuard
         if: always()

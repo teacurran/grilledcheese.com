@@ -127,3 +127,6 @@ local.properties
 app/logs
 
 infra/.terraform/providers
+
+# The site tooling at the repo root; the Eclipse "bin/" rule above is for the Perl app.
+!/bin/
