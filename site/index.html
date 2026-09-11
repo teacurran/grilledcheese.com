@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grilled Cheese — one account on both ATProto and ActivityPub</title>
+<meta name="description" content="Grilled Cheese is a new federated social network. One account that reaches across both ATProto and ActivityPub, built for posting and reading short-form content and media.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7edd9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#110f0a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://grilledcheese.com/">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Grilled Cheese">
+<meta property="og:title" content="Grilled Cheese — one account on both ATProto and ActivityPub">
+<meta property="og:description" content="A new federated social network. Post once and both networks get it; follow anyone on Bluesky or Mastodon without leaving.">
+<meta property="og:url" content="https://grilledcheese.com/">
+<meta property="og:image" content="https://grilledcheese.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Grilled Cheese sandwich mark beside the words Grilled Cheese, one account on both ATProto and ActivityPub.">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{
+  --page:#f7edd9;--surface:#fdf6e7;--ink:#2a2012;--muted:#5f5440;--hairline:#e2d2b3;
+  --accent:#8a5008;--accent-ink:#fdf6e7;--accent-soft:#f2dfb6;--bezel:#1a1a1c;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --measure:38rem;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --page:#110f0a;--surface:#19150f;--ink:#ede8de;--muted:#a59d8a;--hairline:#2c2820;
+    --accent:#f0be43;--accent-ink:#110f0a;--accent-soft:#2f2519;--bezel:#26262a;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.6 var(--sans);text-rendering:optimizeLegibility}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.01em;margin:0 0 .5em;text-wrap:balance}
+h1{font-size:clamp(2.4rem,7vw,3.9rem)}
+h2{font-size:clamp(1.8rem,4.5vw,2.6rem)}
+h3{font-size:1.25rem;font-family:var(--sans);font-weight:650;line-height:1.3}
+p,ul,ol,dl,table{margin:0 0 1em;max-width:var(--measure)}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.15em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+img{max-width:100%;height:auto}
+code{font:.92em var(--mono);background:var(--accent-soft);padding:.1em .35em;border-radius:.3em;white-space:nowrap}
+.skip{position:absolute;left:-999px;top:0;padding:.6em 1em;background:var(--accent);color:var(--accent-ink);font-weight:600;z-index:10}
+.skip:focus{left:1rem;top:1rem}
+.wrap{max-width:70rem;margin-inline:auto;padding-inline:clamp(1rem,4vw,2.5rem)}
+
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding:1rem 0}
+.brand{display:inline-flex;align-items:center;gap:.6rem;color:inherit;text-decoration:none;font-family:var(--serif);font-weight:600;font-size:1.35rem;margin-right:auto}
+.brand img{width:2.25rem;height:auto}
+.top nav ul{display:flex;flex-wrap:wrap;gap:.25rem 1rem;list-style:none;margin:0;padding:0;font-size:.95rem}
+.top nav a{color:inherit;text-decoration:none;padding:.35em 0;border-bottom:2px solid transparent}
+.top nav a:hover{border-color:var(--accent)}
+
+.btn{display:inline-block;padding:.75em 1.35em;border-radius:.6em;font-weight:650;text-decoration:none;border:2px solid var(--accent);line-height:1.2}
+.btn-fill{background:var(--accent);color:var(--accent-ink)}
+.btn-line{color:var(--accent)}
+.btn:hover{text-decoration:underline}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.6rem 0 0}
+
+.hero{display:grid;gap:2rem;align-items:end;padding:clamp(2rem,6vw,4.5rem) 0 0}
+.hero .lede{font-size:clamp(1.1rem,2.2vw,1.35rem);color:var(--muted)}
+.hero .kicker{font-family:var(--sans);font-size:.95rem;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.hero .peek{margin-top:1rem}
+@media (min-width:52em){
+  .hero{grid-template-columns:1.15fr .85fr;gap:3rem}
+  .hero .peek{margin-top:0}
+}
+
+.phone{width:min(17rem,78vw);margin:0 auto;padding:.55rem;background:var(--bezel);border-radius:2.7rem;box-shadow:0 1.5rem 3rem -1.2rem rgb(0 0 0/.5)}
+.phone img{display:block;width:100%;height:auto;border-radius:2.15rem;background:var(--bezel)}
+.peek{overflow:hidden;max-height:clamp(22rem,60vh,34rem)}
+.peek .phone{border-bottom-left-radius:0;border-bottom-right-radius:0;padding-bottom:0}
+.peek .phone img{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.hang{overflow:hidden;max-height:clamp(22rem,60vh,34rem);display:flex;align-items:flex-end}
+.hang .phone{border-top-left-radius:0;border-top-right-radius:0;padding-top:0}
+.hang .phone img{border-top-left-radius:0;border-top-right-radius:0}
+figure{margin:0}
+
+section{padding:clamp(3rem,8vw,6rem) 0;border-top:1px solid var(--hairline)}
+section:first-of-type{border-top:0}
+.feature{display:grid;gap:2.5rem;align-items:center}
+@media (min-width:52em){
+  .feature{grid-template-columns:1fr 1fr;gap:4rem}
+  .feature.flip>.copy{order:2}
+}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
+.pair .phone{width:min(17rem,44vw)}
+.pair .peek,.pair .hang{max-height:clamp(18rem,52vh,30rem)}
+
+.addresses{border-collapse:collapse;width:100%;font-size:.98rem}
+.addresses th,.addresses td{text-align:left;padding:.55em .8em .55em 0;border-bottom:1px solid var(--hairline);vertical-align:top}
+.addresses th{font-weight:650}
+.addresses caption{text-align:left;font-weight:650;padding-bottom:.4em}
+
+.split{display:grid;gap:1.5rem;margin:1.5rem 0}
+@media (min-width:40em){.split{grid-template-columns:1fr 1fr}}
+.split>div{background:var(--surface);border:1px solid var(--hairline);border-radius:1rem;padding:1.25rem 1.4rem}
+.split ul{padding-left:1.1em;margin-bottom:0}
+.split li{margin-bottom:.35em}
+
+dl.faces{display:grid;gap:.9rem 1.2rem;grid-template-columns:auto 1fr;margin:1.2rem 0}
+dl.faces dt{font-weight:650}
+dl.faces dd{margin:0}
+
+.grid{display:grid;gap:1.25rem;list-style:none;padding:0;margin:2rem 0 0;max-width:none;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.grid li{background:var(--surface);border:1px solid var(--hairline);border-radius:1rem;padding:1.25rem 1.4rem}
+.grid h3{margin-bottom:.35em}
+.grid p{margin-bottom:0;color:var(--muted)}
+.grid p:not(:last-child){margin-bottom:.5em}
+
+.note{border-left:3px solid var(--accent);padding:.2em 0 .2em 1em;color:var(--muted)}
+
+.stores{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin:1.5rem 0}
+.badge{display:inline-flex;flex-direction:column;justify-content:center;min-width:11rem;min-height:3.6rem;padding:.5rem 1rem;border-radius:.6rem;border:2px dashed var(--hairline);color:var(--muted);font-size:.85rem;line-height:1.25}
+.badge strong{color:var(--ink);font-size:1.05rem}
+
+footer{border-top:1px solid var(--hairline);padding:2.5rem 0 3rem;font-size:.95rem;color:var(--muted)}
+footer ul{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;list-style:none;padding:0;margin:0 0 1.25rem;max-width:none}
+footer p{max-width:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap top">
+  <a class="brand" href="/">
+    <img src="/img/mark-128.png" width="128" height="90" alt="">
+    Grilled Cheese
+  </a>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="#federation">Federation</a></li>
+      <li><a href="#identities">Identities</a></li>
+      <li><a href="#feeds">Feeds</a></li>
+      <li><a href="#get">Get the app</a></li>
+      <li><a href="https://docs.grilledcheese.app/">Docs</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="copy">
+    <p class="kicker">A new federated social network</p>
+    <h1 id="hero-title">One account.<br>Both networks.</h1>
+    <p class="lede">Grilled Cheese speaks ATProto and ActivityPub at once. Post once and Bluesky and Mastodon both get it. Follow anyone, on either network, without leaving.</p>
+    <p class="lede">Built new, front to back, to be fast, and to be the best place to post and read short-form content and media.</p>
+    <div class="actions">
+      <a class="btn btn-fill" href="https://grilledcheese.app/">Use it in your browser</a>
+      <a class="btn btn-line" href="#get">Get the app</a>
+    </div>
+  </div>
+  <figure class="peek">
+    <div class="phone">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" type="image/avif" srcset="/img/screens/feed-text-dark-360.avif 360w, /img/screens/feed-text-dark-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
+        <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="/img/screens/feed-text-dark-360.webp 360w, /img/screens/feed-text-dark-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px">
+        <source type="image/avif" srcset="/img/screens/feed-text-light-360.avif 360w, /img/screens/feed-text-light-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
+        <img src="/img/screens/feed-text-light-360.webp" srcset="/img/screens/feed-text-light-360.webp 360w, /img/screens/feed-text-light-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px" width="1070" height="2167" fetchpriority="high" alt="The Home feed in the Text view: posts from The Associated Press, The New York Times and people on other networks, each with reply, repost, like and share actions, and the compose button in the bottom bar.">
+      </picture>
+    </div>
+  </figure>
+</section>
+
+<section id="federation" aria-labelledby="federation-title">
+  <div class="feature">
+    <div class="copy">
+      <h2 id="federation-title">Most social apps are one network. Grilled Cheese is on two at once.</h2>
+      <p>It speaks <strong>ATProto</strong>, the protocol Bluesky runs on, and <strong>ActivityPub</strong>, the protocol Mastodon and the rest of the fediverse run on. You post once and both networks get it. You follow one account and it does not matter which network that account lives on. Nobody has to sign up here to read you, and you do not have to leave to read them.</p>
+      <p>Search for someone by their Bluesky handle or their fediverse address and follow them. Their posts land in your Following feed alongside everyone else, and their follows, likes and replies reach you the same way.</p>
+      <table class="addresses">
+        <caption>One identity, two addresses, both real</caption>
+        <thead><tr><th scope="col">Network</th><th scope="col">What people type to find you</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">ATProto (Bluesky and friends)</th><td><code>@you.grilledcheese.app</code></td></tr>
+          <tr><th scope="row">ActivityPub (Mastodon and friends)</th><td><code>@you@grilledcheese.app</code></td></tr>
+        </tbody>
+      </table>
+      <p>The badge under a profile name says which networks that identity is reachable on. The two networks are not the same shape, so a post does not always arrive looking the way you wrote it. <a href="https://docs.grilledcheese.app/user-guide#federation">What crosses, and what it looks like when it arrives</a> is written down in full.</p>
+    </div>
+    <div class="pair">
+      <figure class="peek">
+        <div class="phone">
+          <picture>
+            <source type="image/avif" srcset="/img/screens/profile-own-light-360.avif 360w, /img/screens/profile-own-light-720.avif 720w" sizes="(max-width: 40em) 44vw, 272px">
+            <img src="/img/screens/profile-own-light-360.webp" srcset="/img/screens/profile-own-light-360.webp 360w, /img/screens/profile-own-light-720.webp 720w" sizes="(max-width: 40em) 44vw, 272px" width="1070" height="2167" loading="lazy" decoding="async" alt="A Grilled Cheese user's own profile, on the Blue theme, with an Edit profile button and a badge under it reading ATProto + ActivityPub.">
+          </picture>
+        </div>
+      </figure>
+      <figure class="hang">
+        <div class="phone">
+          <picture>
+            <source type="image/avif" srcset="/img/screens/profile-bluesky-light-360.avif 360w, /img/screens/profile-bluesky-light-720.avif 720w" sizes="(max-width: 40em) 44vw, 272px">
+            <img src="/img/screens/profile-bluesky-light-360.webp" srcset="/img/screens/profile-bluesky-light-360.webp 360w, /img/screens/profile-bluesky-light-720.webp 720w" sizes="(max-width: 40em) 44vw, 272px" width="1070" height="2117" loading="lazy" decoding="async" alt="The profile of thisisstar.bsky.social, a Bluesky account, opened inside Grilled Cheese: a Following button, an ATProto badge, follower counts, and a grid of their media posts.">
+          </picture>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="identities" aria-labelledby="identities-title">
+  <h2 id="identities-title">Five identities. One login.</h2>
+  <p>Your <strong>account</strong> is you: one email address, one password, one set of security settings. Your <strong>identities</strong> are the presences you keep, each with its own handle, profile, followers, posts and preferences. Free accounts include five, and none of them needs a separate email address.</p>
+  <p>They are not sub-accounts and not aliases. To everyone else, two of your identities look like two unrelated people. Nothing on a public profile connects them, and the app never posts as one while you think you are the other. The switcher is a button in the menu, and choosing an identity reloads the whole app as that persona: its feed, its notifications, its settings, its drafts.</p>
+  <div class="split">
+    <div>
+      <h3>Belongs to the account</h3>
+      <ul>
+        <li>Email address and password</li>
+        <li>Two-factor authentication and recovery codes</li>
+        <li>Sessions and remembered devices</li>
+        <li>Premium subscription</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Belongs to each identity</h3>
+      <ul>
+        <li>Handle, display name, avatar, banner, bio</li>
+        <li>Followers and following</li>
+        <li>Posts, replies, bookmarks</li>
+        <li>Privacy, notification and content preferences</li>
+        <li>Federation settings</li>
+      </ul>
+    </div>
+  </div>
+  <p>The split is what lets one identity be private while another is public, and what makes a change to your password protect all of them at once.</p>
+  <h3>Pick the domain, not just the name</h3>
+  <p>A new identity asks for two things: a username, and the domain it lives on. Grilled Cheese serves several domains, and the handle is the two together.</p>
+  <h3>Organizations on their own domain</h3>
+  <p>An organization can point a domain it owns at Grilled Cheese. Once the domain is validated, the organization can grant identities on it, <code>you@yourcompany.com</code>, to member accounts. Those work exactly like any other identity: the member switches to it, posts from it, and keeps it separate from their personal presences.</p>
+</section>
+
+<section id="feeds" aria-labelledby="feeds-title">
+  <div class="feature flip">
+    <div class="copy">
+      <h2 id="feeds-title">Home is not one timeline.</h2>
+      <p>It is one feed you look at through a filter, and the filter is yours to change at any moment. Every identity has two sources: <strong>Following</strong>, the accounts it follows wherever they live, and <strong>Discovery</strong>, posts from across both networks that Grilled Cheese thinks you might want. If you follow nobody yet, Home shows you Discovery. A new account is not an empty room.</p>
+      <p>The switch at the top of Home chooses what <em>kind</em> of thing the feed shows you:</p>
+      <dl class="faces">
+        <dt>Photos</dt><dd>Photo posts only, edge to edge, one square image per cell.</dd>
+        <dt>Videos</dt><dd>Video posts only, playing full-bleed as you scroll, from Grilled Cheese and from the networks it federates with.</dd>
+        <dt>Text</dt><dd>Text posts only. The Twitter-shaped face.</dd>
+        <dt>Everything</dt><dd>No filter at all.</dd>
+      </dl>
+      <p>The compose button changes with the face you are on: a camera in Photos, a camcorder in Videos, a pencil in Text. Whatever you are looking at, the button makes more of it.</p>
+    </div>
+    <figure class="peek">
+      <div class="phone">
+        <picture>
+          <source type="image/avif" srcset="/img/screens/feed-video-dark-360.avif 360w, /img/screens/feed-video-dark-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
+          <img src="/img/screens/feed-video-dark-360.webp" srcset="/img/screens/feed-video-dark-360.webp 360w, /img/screens/feed-video-dark-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px" width="1070" height="2337" loading="lazy" decoding="async" alt="The Home feed in the Videos view, in dark mode: a video of someone cycling across a covered bridge fills the width, with the next video queued below and the camcorder compose button in the bottom bar.">
+        </picture>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="conversations" aria-labelledby="conversations-title">
+  <div class="feature">
+    <div class="copy">
+      <h2 id="conversations-title">Conversations are end-to-end encrypted.</h2>
+      <p>Private messages between Grilled Cheese accounts use the Messaging Layer Security standard, <abbr title="Request for Comments">RFC</abbr> 9420. Grilled Cheese's servers carry the messages but cannot read them. A conversation can be one-to-one or a group, and it belongs to the identity you are using, like everything else.</p>
+      <p class="note">Someone on Mastodon can message you too, and it arrives as a conversation here. ActivityPub has no message encryption, so that thread is not encrypted, and the app marks it plainly rather than let the lock icon claim something untrue.</p>
+    </div>
+    <figure class="peek">
+      <div class="phone">
+        <picture>
+          <source type="image/avif" srcset="/img/screens/conversation-dark-360.avif 360w, /img/screens/conversation-dark-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
+          <img src="/img/screens/conversation-dark-360.webp" srcset="/img/screens/conversation-dark-360.webp 360w, /img/screens/conversation-dark-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px" width="1070" height="2167" loading="lazy" decoding="async" alt="A conversation with Steve in dark mode: a lock icon in the title bar, a few message bubbles arranging a pizza pickup, a message box, and the keyboard open.">
+        </picture>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="posting" aria-labelledby="posting-title">
+  <div class="feature flip">
+    <div class="copy">
+      <h2 id="posting-title">Post the way you meant to.</h2>
+      <p>The composer takes rich text and, with it, up to ten photos or one video. Beyond that you can:</p>
+      <ul>
+        <li>Add a poll.</li>
+        <li>Choose who can see it, and who can reply.</li>
+        <li>Declare the language it is written in, so it reaches the right readers.</li>
+        <li>Schedule it for later rather than posting now.</li>
+        <li>Put a content warning on it, so it stays covered until a reader chooses to open it.</li>
+        <li>Describe every photo. The alt text reminder is on by default, and an identity can be set to require it.</li>
+      </ul>
+    </div>
+    <figure class="peek">
+      <div class="phone">
+        <picture>
+          <source type="image/avif" srcset="/img/screens/compose-poll-light-360.avif 360w, /img/screens/compose-poll-light-720.avif 720w" sizes="(max-width: 22em) 78vw, 272px">
+          <img src="/img/screens/compose-poll-light-360.webp" srcset="/img/screens/compose-poll-light-360.webp 360w, /img/screens/compose-poll-light-720.webp 720w" sizes="(max-width: 22em) 78vw, 272px" width="1070" height="2167" loading="lazy" decoding="async" alt="The composer with a draft post asking what people think of a new phone, a poll with four answers, a three-day poll length, and a Post button.">
+        </picture>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="more" aria-labelledby="more-title">
+  <h2 id="more-title">And the rest of it.</h2>
+  <ul class="grid">
+    <li>
+      <h3>Works without a connection</h3>
+      <p>Grilled Cheese keeps the last feed it loaded. Open the app offline and you get that timeline with a banner saying so, not an error page. Anything you post waits in an outbox and goes out when the connection comes back.</p>
+    </li>
+    <li>
+      <h3>Nine themes, light and dark</h3>
+      <p>Each built-in theme family has a light and a dark variant, and the app follows whichever your device is set to. Premium adds an editor for making your own, with the contrast of every pairing checked as you go.</p>
+    </li>
+    <li>
+      <h3>Accessibility settings that stack</h3>
+      <p>Text size, higher contrast and reduced motion, per device. Text size is a multiplier over the system setting rather than a replacement for it.</p>
+    </li>
+    <li>
+      <h3>Private identities</h3>
+      <p>On a private identity, follows arrive as requests you approve and posts are hidden from anyone who is not an approved follower. The app tells you exactly how each network treats that before you switch it on.</p>
+    </li>
+    <li>
+      <h3>Your identity is yours to move</h3>
+      <p>Every identity is a full citizen of the AT Protocol network with its own permanent name, a <abbr title="decentralized identifier">DID</abbr>. You can move it to another provider, or bring one here, and your followers, posts and likes come with it.</p>
+    </li>
+    <li>
+      <h3>Connect AI tools</h3>
+      <p>Grilled Cheese speaks the Model Context Protocol. Mint a key and Claude, ChatGPT or any MCP client can read your timeline; with Premium it can post, follow and react as you. <a href="https://docs.grilledcheese.app/mcp">How connecting works</a>.</p>
+    </li>
+    <li>
+      <h3>Premium raises limits, and that is all</h3>
+      <p>Everything in Grilled Cheese works without it. Premium raises the scheduled-post and video-length limits and unlocks the theme editor. There is no Premium badge, and no priority in anyone's feed.</p>
+    </li>
+    <li>
+      <h3>Moderation you can see</h3>
+      <p>Content warnings, hidden words, mute and block on your side; on the other, a moderation record that shows every action taken on your account, the guideline it cited, and its appeal.</p>
+    </li>
+  </ul>
+</section>
+
+<section id="get" aria-labelledby="get-title">
+  <h2 id="get-title">Get Grilled Cheese</h2>
+  <p>The same network everywhere. It runs in your browser right now; the native apps are the same account on your own devices.</p>
+  <div class="actions">
+    <a class="btn btn-fill" href="https://grilledcheese.app/">Open Grilled Cheese in your browser</a>
+  </div>
+  <div class="stores" role="group" aria-label="App stores">
+    <!-- PLACEHOLDER: replace with the real App Store badge and listing URL once the iOS build is published. -->
+    <span class="badge" role="img" aria-label="App Store: coming soon"><span aria-hidden="true">iPhone and iPad</span><strong aria-hidden="true">App Store · coming soon</strong></span>
+    <!-- PLACEHOLDER: replace with the real Google Play badge and listing URL once the Android build is published. -->
+    <span class="badge" role="img" aria-label="Google Play: coming soon"><span aria-hidden="true">Android</span><strong aria-hidden="true">Google Play · coming soon</strong></span>
+  </div>
+  <p>macOS and Windows builds are on the way. The web app works on both in the meantime, and your account is the same either way. <a href="https://docs.grilledcheese.app/download">Every platform, and where to get it</a>.</p>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <ul>
+    <li><a href="https://docs.grilledcheese.app/user-guide">User Guide</a></li>
+    <li><a href="https://docs.grilledcheese.app/about">About</a></li>
+    <li><a href="https://docs.grilledcheese.app/release-notes">Release Notes</a></li>
+    <li><a href="https://docs.grilledcheese.app/privacy-policy">Privacy Policy</a></li>
+    <li><a href="https://docs.grilledcheese.app/terms-and-conditions">Terms &amp; Conditions</a></li>
+    <li><a href="https://docs.grilledcheese.app/community-standards">Community Standards</a></li>
+  </ul>
+  <p>Grilled Cheese is a product of <a href="https://villagecompute.com/">Village Compute</a>, a software company in Groton, Vermont. Questions, bug reports and feature requests are welcome at <a href="mailto:support@villagecompute.com">support@villagecompute.com</a>.</p>
+  <p>This page sets no cookies, runs no scripts, and loads nothing from anyone else.</p>
+</footer>
+</body>
+</html>
