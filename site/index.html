@@ -124,6 +124,8 @@ dl.faces dd{margin:0}
 .stores{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin:1.5rem 0}
 .badge{display:inline-flex;flex-direction:column;justify-content:center;min-width:11rem;min-height:3.6rem;padding:.5rem 1rem;border-radius:.6rem;border:2px dashed var(--hairline);color:var(--muted);font-size:.85rem;line-height:1.25}
 .badge strong{color:var(--ink);font-size:1.05rem}
+.store-link{display:inline-block;line-height:0;border-radius:.6rem}
+.store-link img{display:block;height:3.4rem;width:auto}
 
 footer{border-top:1px solid var(--hairline);padding:2.5rem 0 3rem;font-size:.95rem;color:var(--muted)}
 footer ul{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;list-style:none;padding:0;margin:0 0 1.25rem;max-width:none}
@@ -274,9 +276,9 @@ footer p{max-width:none}
 <section id="conversations" aria-labelledby="conversations-title">
   <div class="feature">
     <div class="copy">
-      <h2 id="conversations-title">Conversations are end-to-end encrypted.</h2>
-      <p>Private messages between Grilled Cheese accounts use the Messaging Layer Security standard, <abbr title="Request for Comments">RFC</abbr> 9420. Grilled Cheese's servers carry the messages but cannot read them. A conversation can be one-to-one or a group, and it belongs to the identity you are using, like everything else.</p>
-      <p class="note">Someone on Mastodon can message you too, and it arrives as a conversation here. ActivityPub has no message encryption, so that thread is not encrypted, and the app marks it plainly rather than let the lock icon claim something untrue.</p>
+      <h2 id="conversations-title">Optional end-to-end encryption.</h2>
+      <p>Conversations work on every device you sign in on. Turn on Secure Conversations and a conversation between Grilled Cheese accounts can be end-to-end encrypted with the Messaging Layer Security standard, <abbr title="Request for Comments">RFC</abbr> 9420: Grilled Cheese's servers carry those messages but cannot read them. An encrypted conversation shows a lock and stays on the device that started it. A conversation can be one-to-one or a group, and it belongs to the identity you are using, like everything else.</p>
+      <p class="note">Someone on Mastodon can message you too, and it arrives as a conversation here. ActivityPub has no message encryption, so those conversations never show the lock.</p>
     </div>
     <figure class="peek">
       <div class="phone">
@@ -359,8 +361,7 @@ footer p{max-width:none}
     <a class="btn btn-fill" href="https://grilledcheese.app/">Open Grilled Cheese in your browser</a>
   </div>
   <div class="stores" role="group" aria-label="App stores">
-    <!-- PLACEHOLDER: replace with the real App Store badge and listing URL once the iOS build is published. -->
-    <span class="badge" role="img" aria-label="App Store: coming soon"><span aria-hidden="true">iPhone and iPad</span><strong aria-hidden="true">App Store · coming soon</strong></span>
+    <a class="store-link" href="https://apps.apple.com/app/id6806317987"><img src="/img/badges/app-store.svg" width="162" height="54" alt="Download on the App Store"></a>
     <!-- PLACEHOLDER: replace with the real Google Play badge and listing URL once the Android build is published. -->
     <span class="badge" role="img" aria-label="Google Play: coming soon"><span aria-hidden="true">Android</span><strong aria-hidden="true">Google Play · coming soon</strong></span>
   </div>
