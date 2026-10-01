@@ -55,7 +55,7 @@ code{font:.92em var(--mono);background:var(--accent-soft);padding:.1em .35em;bor
 .skip:focus{left:1rem;top:1rem}
 .wrap{max-width:70rem;margin-inline:auto;padding-inline:clamp(1rem,4vw,2.5rem)}
 
-.top{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding:1rem 0}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding-block:1rem}
 .brand{display:inline-flex;align-items:center;gap:.6rem;color:inherit;text-decoration:none;font-family:var(--serif);font-weight:600;font-size:1.35rem;margin-right:auto}
 .brand img{width:2.25rem;height:auto}
 .top nav ul{display:flex;flex-wrap:wrap;gap:.25rem 1rem;list-style:none;margin:0;padding:0;font-size:.95rem}
@@ -66,7 +66,7 @@ code{font:.92em var(--mono);background:var(--accent-soft);padding:.1em .35em;bor
 .btn-fill{background:var(--accent);color:var(--accent-ink)}
 .btn-line{color:var(--accent)}
 .btn:hover{text-decoration:underline}
-.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.6rem 0 0}
+.actions{display:flex;flex-wrap:wrap;align-items:flex-start;gap:.75rem;margin:1.6rem 0 0}
 
 .hero{display:grid;gap:2rem;align-items:end;padding:clamp(2rem,6vw,4.5rem) 0 0}
 .hero .lede{font-size:clamp(1.1rem,2.2vw,1.35rem);color:var(--muted)}
@@ -75,6 +75,7 @@ code{font:.92em var(--mono);background:var(--accent-soft);padding:.1em .35em;bor
 @media (min-width:52em){
   .hero{grid-template-columns:1.15fr .85fr;gap:3rem}
   .hero .peek{margin-top:0}
+  .hero .actions{margin-bottom:1.25rem}
 }
 
 .phone{width:min(17rem,78vw);margin:0 auto;padding:.55rem;background:var(--bezel);border-radius:2.7rem;box-shadow:0 1.5rem 3rem -1.2rem rgb(0 0 0/.5)}
@@ -121,11 +122,14 @@ dl.faces dd{margin:0}
 
 .note{border-left:3px solid var(--accent);padding:.2em 0 .2em 1em;color:var(--muted)}
 
-.stores{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin:1.5rem 0}
-.badge{display:inline-flex;flex-direction:column;justify-content:center;min-width:11rem;min-height:3.6rem;padding:.5rem 1rem;border-radius:.6rem;border:2px dashed var(--hairline);color:var(--muted);font-size:.85rem;line-height:1.25}
-.badge strong{color:var(--ink);font-size:1.05rem}
-.store-link{display:inline-block;line-height:0;border-radius:.6rem}
-.store-link img{display:block;height:3.4rem;width:auto}
+.stores{--badge-h:3.125rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-start;margin:1.5rem 0}
+.actions .stores{margin:0}
+@media (max-width:24em){.stores{--badge-h:2.75rem}}
+.store-link{display:inline-block;line-height:0;border-radius:.45rem}
+.store-link img{display:block;height:var(--badge-h);width:auto}
+.store-link.play img{max-width:none;height:calc(var(--badge-h)*250/168);margin:calc(var(--badge-h)*-41/168)}
+.store-soon{display:inline-flex;flex-direction:column;align-items:center;cursor:default}
+.store-soon .soon{line-height:1.2;margin-top:.4rem;font-size:.8rem;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 
 footer{border-top:1px solid var(--hairline);padding:2.5rem 0 3rem;font-size:.95rem;color:var(--muted)}
 footer ul{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;list-style:none;padding:0;margin:0 0 1.25rem;max-width:none}
@@ -160,8 +164,12 @@ footer p{max-width:none}
     <p class="lede">Grilled Cheese speaks ATProto and ActivityPub at once. Post once and Bluesky and Mastodon both get it. Follow anyone, on either network, without leaving.</p>
     <p class="lede">Built new, front to back, to be fast, and to be the best place to post and read short-form content and media.</p>
     <div class="actions">
-      <a class="btn btn-fill" href="https://grilledcheese.app/">Use it in your browser</a>
-      <a class="btn btn-line" href="#get">Get the app</a>
+      <div class="stores" role="group" aria-label="App stores">
+        <a class="store-link" href="https://apps.apple.com/app/id6806317987"><img src="/img/badges/app-store.svg" width="120" height="40" decoding="async" alt="Download on the App Store"></a>
+        <!-- Google Play is in review. Once the listing is public, make this <a class="store-link play" href="https://play.google.com/store/apps/details?id=app.grilledcheese"> with the image alt "Get it on Google Play", and drop store-soon and the caption. -->
+        <a class="store-link play store-soon" role="link" aria-disabled="true" aria-label="Google Play — coming soon"><img src="/img/badges/google-play.png" width="646" height="250" decoding="async" alt=""><span class="soon" aria-hidden="true">Coming soon</span></a>
+      </div>
+      <a class="btn btn-line" href="https://grilledcheese.app/">Use it in your browser</a>
     </div>
   </div>
   <figure class="peek">
@@ -361,9 +369,9 @@ footer p{max-width:none}
     <a class="btn btn-fill" href="https://grilledcheese.app/">Open Grilled Cheese in your browser</a>
   </div>
   <div class="stores" role="group" aria-label="App stores">
-    <a class="store-link" href="https://apps.apple.com/app/id6806317987"><img src="/img/badges/app-store.svg" width="162" height="54" alt="Download on the App Store"></a>
-    <!-- PLACEHOLDER: replace with the real Google Play badge and listing URL once the Android build is published. -->
-    <span class="badge" role="img" aria-label="Google Play: coming soon"><span aria-hidden="true">Android</span><strong aria-hidden="true">Google Play · coming soon</strong></span>
+    <a class="store-link" href="https://apps.apple.com/app/id6806317987"><img src="/img/badges/app-store.svg" width="120" height="40" loading="lazy" decoding="async" alt="Download on the App Store"></a>
+    <!-- Google Play is in review. Once the listing is public, make this <a class="store-link play" href="https://play.google.com/store/apps/details?id=app.grilledcheese"> with the image alt "Get it on Google Play", and drop store-soon and the caption. -->
+    <a class="store-link play store-soon" role="link" aria-disabled="true" aria-label="Google Play — coming soon"><img src="/img/badges/google-play.png" width="646" height="250" loading="lazy" decoding="async" alt=""><span class="soon" aria-hidden="true">Coming soon</span></a>
   </div>
   <p>macOS and Windows builds are on the way. The web app works on both in the meantime, and your account is the same either way. <a href="https://docs.grilledcheese.app/download">Every platform, and where to get it</a>.</p>
 </section>

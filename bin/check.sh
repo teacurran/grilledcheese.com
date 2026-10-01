@@ -8,7 +8,8 @@
 #  4. The app is never linked at a grilledcheese.com URL. The product lives at
 #     grilledcheese.app; .com is marketing only.
 #  5. The first view stays under the budget: HTML + mark + favicon + the
-#     largest hero image a 2x phone would fetch, before any lazy image.
+#     largest hero image a 2x phone would fetch + the two store badges,
+#     before any lazy image.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -61,8 +62,9 @@ hero=0
 for f in "$site"/img/screens/feed-text-{light,dark}-720.{avif,webp}; do
   s=$(size "$f"); [ "$s" -gt "$hero" ] && hero=$s
 done
-first=$(( $(size "$html") + $(size "$site/img/mark-128.png") + $(size "$site/favicon.ico") + hero ))
-say "first view (uncompressed HTML + mark + favicon + largest hero variant): $((first / 1024)) KB"
+badges=$(( $(size "$site/img/badges/app-store.svg") + $(size "$site/img/badges/google-play.png") ))
+first=$(( $(size "$html") + $(size "$site/img/mark-128.png") + $(size "$site/favicon.ico") + hero + badges ))
+say "first view (uncompressed HTML + mark + favicon + largest hero variant + store badges): $((first / 1024)) KB"
 say "whole site: $(du -sk "$site" | cut -f1) KB"
 [ "$first" -lt "$budget" ] || err "first view exceeds the $((budget / 1024)) KB budget"
 
