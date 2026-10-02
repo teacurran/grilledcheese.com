@@ -128,8 +128,6 @@ dl.faces dd{margin:0}
 .store-link{display:inline-block;line-height:0;border-radius:.45rem}
 .store-link img{display:block;height:var(--badge-h);width:auto}
 .store-link.play img{max-width:none;height:calc(var(--badge-h)*250/168);margin:calc(var(--badge-h)*-41/168)}
-.store-soon{display:inline-flex;flex-direction:column;align-items:center;cursor:default}
-.store-soon .soon{line-height:1.2;margin-top:.4rem;font-size:.8rem;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 
 footer{border-top:1px solid var(--hairline);padding:2.5rem 0 3rem;font-size:.95rem;color:var(--muted)}
 footer ul{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;list-style:none;padding:0;margin:0 0 1.25rem;max-width:none}
@@ -166,8 +164,7 @@ footer p{max-width:none}
     <div class="actions">
       <div class="stores" role="group" aria-label="App stores">
         <a class="store-link" href="https://apps.apple.com/app/id6806317987"><img src="/img/badges/app-store.svg" width="120" height="40" decoding="async" alt="Download on the App Store"></a>
-        <!-- Google Play is in review. Once the listing is public, make this <a class="store-link play" href="https://play.google.com/store/apps/details?id=app.grilledcheese"> with the image alt "Get it on Google Play", and drop store-soon and the caption. -->
-        <a class="store-link play store-soon" role="link" aria-disabled="true" aria-label="Google Play — coming soon"><img src="/img/badges/google-play.png" width="646" height="250" decoding="async" alt=""><span class="soon" aria-hidden="true">Coming soon</span></a>
+        <a class="store-link play" href="https://play.google.com/store/apps/details?id=app.grilledcheese"><img src="/img/badges/google-play.png" width="646" height="250" decoding="async" alt="Get it on Google Play"></a>
       </div>
       <a class="btn btn-line" href="https://grilledcheese.app/">Use it in your browser</a>
     </div>
@@ -370,8 +367,7 @@ footer p{max-width:none}
   </div>
   <div class="stores" role="group" aria-label="App stores">
     <a class="store-link" href="https://apps.apple.com/app/id6806317987"><img src="/img/badges/app-store.svg" width="120" height="40" loading="lazy" decoding="async" alt="Download on the App Store"></a>
-    <!-- Google Play is in review. Once the listing is public, make this <a class="store-link play" href="https://play.google.com/store/apps/details?id=app.grilledcheese"> with the image alt "Get it on Google Play", and drop store-soon and the caption. -->
-    <a class="store-link play store-soon" role="link" aria-disabled="true" aria-label="Google Play — coming soon"><img src="/img/badges/google-play.png" width="646" height="250" loading="lazy" decoding="async" alt=""><span class="soon" aria-hidden="true">Coming soon</span></a>
+    <a class="store-link play" href="https://play.google.com/store/apps/details?id=app.grilledcheese"><img src="/img/badges/google-play.png" width="646" height="250" loading="lazy" decoding="async" alt="Get it on Google Play"></a>
   </div>
   <p>macOS and Windows builds are on the way. The web app works on both in the meantime, and your account is the same either way. <a href="https://docs.grilledcheese.app/download">Every platform, and where to get it</a>.</p>
 </section>
